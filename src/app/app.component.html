@@ -5,23 +5,31 @@
             nzBreakpoint="md"
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
-    <div class="sidebar-logo">
+    <div class="sidebar-logo" [ngClass]="isCollapsed?'sidebar-logo-small':''">
       <a href="https://ng.ant.design/" target="_blank">
-        <img src="assets/default-monochrome.svg" alt="logo">
+        <img [src]="isCollapsed?'assets/default-no-text.svg':'assets/default-monochrome.svg'" alt="logo">
       
       </a>
     </div>
     <ul nz-menu nzOpen nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Blog" nzIcon="dashboard">
+  
+      <li  nzMatchRouter routerLink="/home" nz-menu-item>
+        <i nz-icon nzType="home"></i>
+        <span>Home</span>
+      </li>
+      <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
         <ul>
           <li nz-menu-item nzMatchRouter *ngFor="let page of links$ | async">
             <a [routerLink]='page.route'>{{ page.title }}</a>
           </li>
         </ul>
       </li>
-      <li nzMatchRouter nz-menu-item>
-        <a routerLink="/about">About</a>
+      <li  nzMatchRouter routerLink="/about" nz-menu-item>
+        <i nz-icon nzType="smile" ></i>
+        <span>About</span>
       </li>
+  
+      
     </ul>
   </nz-sider>
   <nz-layout>
