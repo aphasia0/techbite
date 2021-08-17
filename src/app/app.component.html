@@ -1,46 +1,93 @@
 <nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar"
-            nzCollapsible
-            nzWidth="256px"
-            nzBreakpoint="md"
-            [(nzCollapsed)]="isCollapsed"
-            [nzTrigger]="null">
-    <div class="sidebar-logo" [ngClass]="isCollapsed?'sidebar-logo-small':''">
+  <nz-sider
+    class="menu-sidebar"
+    nzCollapsible
+    nzWidth="256px"
+    nzBreakpoint="md"
+    [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null"
+  >
+    <div
+      class="sidebar-logo"
+      [ngClass]="isCollapsed ? 'sidebar-logo-small' : ''"
+    >
       <a href="https://ng.ant.design/" target="_blank">
-        <img [src]="isCollapsed?'assets/default-no-text.svg':'assets/default-monochrome.svg'" alt="logo">
-      
+        <img
+          [src]="
+            isCollapsed
+              ? 'assets/default-no-text.svg'
+              : 'assets/default-monochrome.svg'
+          "
+          alt="logo"
+        />
       </a>
     </div>
-    <ul nz-menu nzOpen nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-  
-      <li  nzMatchRouter routerLink="/home" nz-menu-item>
+    <ul
+      nz-menu
+      nzOpen
+      nzTheme="dark"
+      nzMode="inline"
+      [nzInlineCollapsed]="isCollapsed"
+    >
+      <li nzMatchRouter routerLink="/home" nz-menu-item>
         <i nz-icon nzType="home"></i>
         <span>Home</span>
       </li>
       <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
         <ul>
           <li nz-menu-item nzMatchRouter *ngFor="let page of links$ | async">
-            <a [routerLink]='page.route'>{{ page.title }}</a>
+            <a [routerLink]="page.route">{{ page.title }}</a>
           </li>
         </ul>
       </li>
-      <li  nzMatchRouter routerLink="/about" nz-menu-item>
-        <i nz-icon nzType="smile" ></i>
+      <li nzMatchRouter routerLink="/about" nz-menu-item>
+        <i nz-icon nzType="smile"></i>
         <span>About</span>
       </li>
-  
-      
     </ul>
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <i class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></i>
-        </span>
+      <div  nz-row class="app-header">
+    
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12"  class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <i
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></i>
+        </div>
+        <ng-template #suffixIconButton>
+          <button nz-button nzType="primary" nzSize="large" nzSearch>
+            <i nz-icon nzType="search" nzTheme="outline"></i>
+          </button>
+        </ng-template>
+        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12" class="search-input">
+          <nz-input-group
+            nzSearch
+            nzSize="large"
+            [nzAddOnAfter]="suffixIconButton"
+          >
+            <input
+              class="search-box"
+              placeholder="input here"
+              nz-input
+              [(ngModel)]="inputValue"
+              (input)="onInput($event)"
+              [nzAutocomplete]="auto"
+            />
+          </nz-input-group>
+          <ng-template #suffixIconButton>
+            <button nz-button nzType="primary" nzSize="large" nzSearch>
+              <i nz-icon nzType="search" nzTheme="outline"></i>
+            </button>
+          </ng-template>
+          <nz-autocomplete
+            [nzDataSource]="options"
+            nzBackfill
+            #auto
+          ></nz-autocomplete>
+        </div>
       </div>
     </nz-header>
     <nz-content>

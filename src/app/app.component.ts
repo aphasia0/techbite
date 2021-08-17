@@ -9,10 +9,20 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+
+  inputValue?: string;
+  options: string[] = [];
+  isCollapsed = false;
+
   links$: Observable<ScullyRoute[]> = this.scully.available$.pipe(
     map((routes) => routes.filter((route) => route.route !== '/'))
   );
 
   constructor(private scully: ScullyRoutesService) {}
-  isCollapsed = false;
+
+
+  onInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this.options = value ? [value, value + value, value + value + value] : [];
+  }
 }
