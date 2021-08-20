@@ -35,7 +35,7 @@
       </li>
       <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
         <ul>
-          <li nz-menu-item nzMatchRouter *ngFor="let page of links$ | async">
+          <li nz-menu-item nzMatchRouter *ngFor="let page of links">
             <a [routerLink]="page.route">{{ page.title }}</a>
           </li>
         </ul>
@@ -48,9 +48,17 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div  nz-row nzAlign="middle" class="app-header">
-    
-        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12"  class="header-trigger" (click)="isCollapsed = !isCollapsed">
+      <div nz-row nzAlign="middle" class="app-header">
+        <div
+          nz-col
+          nzXs="24"
+          nzSm="24"
+          nzMd="24"
+          nzLg="12"
+          nzXl="12"
+          class="header-trigger"
+          (click)="isCollapsed = !isCollapsed"
+        >
           <i
             class="trigger"
             nz-icon
@@ -62,31 +70,51 @@
             <i nz-icon nzType="search" nzTheme="outline"></i>
           </button>
         </ng-template>
-        <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12" nzXl="12" class="search-input">
-          <nz-input-group
-            nzSearch
-            nzSize="large"
-            [nzAddOnAfter]="suffixIconButton"
-          >
-            <input
-              class="search-box"
-              placeholder="input here"
-              nz-input
-              [(ngModel)]="inputValue"
-              (input)="onInput($event)"
-              [nzAutocomplete]="auto"
-            />
-          </nz-input-group>
-          <ng-template #suffixIconButton>
-            <button nz-button nzType="primary" nzSize="large" nzSearch>
-              <i nz-icon nzType="search" nzTheme="outline"></i>
-            </button>
-          </ng-template>
-          <nz-autocomplete
-            [nzDataSource]="options"
-            nzBackfill
-            #auto
-          ></nz-autocomplete>
+        <div
+          nz-col
+          nzXs="24"
+          nzSm="24"
+          nzMd="24"
+          nzLg="12"
+          nzXl="12"
+          class="search-input"
+        >
+          <form #f="ngForm" nz-form (ngSubmit)="search(f)">
+            <nz-form-item>
+              <nz-form-control [nzSpan]="14">
+                <nz-input-group
+                  nzSearch
+                  nzSize="large"
+                  [nzAddOnAfter]="suffixIconButton"
+                >
+                  <input
+                    class="search-box"
+                    name="search"
+                    placeholder="Search"
+                    nz-input
+                    ngModel
+                    (input)="onInput($event)"
+                    [nzAutocomplete]="auto"
+                  />
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                  <button
+                    nz-button
+                    nzType="primary"
+                    nzSize="large"
+                    nzSearch
+                  >
+                    <i nz-icon nzType="search" nzTheme="outline"></i>
+                  </button>
+                </ng-template>
+                <nz-autocomplete
+                  [nzDataSource]="options"
+                  nzBackfill
+                  #auto
+                ></nz-autocomplete>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
         </div>
       </div>
     </nz-header>
