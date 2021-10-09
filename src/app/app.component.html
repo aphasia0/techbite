@@ -7,44 +7,55 @@
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null"
   >
-    <div
-      class="sidebar-logo"
-      [ngClass]="isCollapsed ? 'sidebar-logo-small' : ''"
-    >
-      <a href="/home" target="_blank">
-        <img
-          [src]="
+    <div style="height:100%;display: flex;flex-direction: column">
+      <div style="flex-grow: 1">
+        <div
+          class="sidebar-logo"
+          [ngClass]="isCollapsed ? 'sidebar-logo-small' : ''"
+        >
+          <a href="/home" target="_blank">
+            <img
+              [src]="
             isCollapsed
               ? 'assets/default-no-text.svg'
               : 'assets/default-monochrome.svg'
           "
-          alt="logo"
-        />
-      </a>
-    </div>
-    <ul
-      nz-menu
-      nzOpen
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
-      <li nzMatchRouter routerLink="/home" nz-menu-item>
-        <i nz-icon nzType="home"></i>
-        <span>Home</span>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
-        <ul>
-          <li nz-menu-item nzMatchRouter *ngFor="let page of links">
-            <a [routerLink]="page.route">{{ page.title }}</a>
+              alt="logo"
+            />
+          </a>
+        </div>
+        <ul
+          nz-menu
+          nzOpen
+          nzTheme="dark"
+          nzMode="inline"
+          [nzInlineCollapsed]="isCollapsed"
+        >
+          <li nzMatchRouter routerLink="/home" nz-menu-item>
+            <i nz-icon nzType="home"></i>
+            <span>Home</span>
           </li>
+          <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
+            <ul>
+              <li nz-menu-item nzMatchRouter *ngFor="let page of links">
+                <a [routerLink]="page.route">{{ page.title }}</a>
+              </li>
+            </ul>
+          </li>
+          <li nzMatchRouter routerLink="/about" nz-menu-item>
+            <i nz-icon nzType="smile"></i>
+            <span>About</span>
+          </li>
+
+
         </ul>
-      </li>
-      <li nzMatchRouter routerLink="/about" nz-menu-item>
-        <i nz-icon nzType="smile"></i>
-        <span>About</span>
-      </li>
-    </ul>
+      </div>
+      <div style="  background: #053017;">
+        <a href="https://twitter.com/aphasia0" target="_blank" ><i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="twitter" nzTheme="outline"></i></a>
+        <a href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank" ><i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="linkedin" nzTheme="outline"></i></a>
+      </div>
+
+    </div>
   </nz-sider>
   <nz-layout>
     <nz-header>
@@ -98,12 +109,7 @@
                   />
                 </nz-input-group>
                 <ng-template #suffixIconButton>
-                  <button
-                    nz-button
-                    nzType="primary"
-                    nzSize="large"
-                    nzSearch
-                  >
+                  <button nz-button nzType="primary" nzSize="large" nzSearch>
                     <i nz-icon nzType="search" nzTheme="outline"></i>
                   </button>
                 </ng-template>
