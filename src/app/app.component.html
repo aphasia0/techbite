@@ -50,7 +50,7 @@
 
         </ul>
       </div>
-      <div style="  background: #053017;">
+      <div style="background: #053017;">
         <a href="https://twitter.com/aphasia0" target="_blank" ><i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="twitter" nzTheme="outline"></i></a>
         <a href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank" ><i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="linkedin" nzTheme="outline"></i></a>
       </div>
@@ -59,12 +59,13 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div nz-row nzAlign="middle" class="app-header">
+
+      <div nz-row nzJustify="start" class="app-header">
         <div
           nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="24"
+          nzXs="3"
+          nzSm="3"
+          nzMd="3"
           nzLg="12"
           nzXl="12"
           class="header-trigger"
@@ -76,23 +77,19 @@
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></i>
         </div>
-        <ng-template #suffixIconButton>
-          <button nz-button nzType="primary" nzSize="large" nzSearch>
-            <i nz-icon nzType="search" nzTheme="outline"></i>
-          </button>
-        </ng-template>
+
         <div
           nz-col
-          nzXs="24"
-          nzSm="24"
-          nzMd="24"
+          nzXs="21"
+          nzSm="21"
+          nzMd="21"
           nzLg="12"
           nzXl="12"
           class="search-input"
         >
+
           <form #f="ngForm" nz-form (ngSubmit)="search(f)">
-            <nz-form-item>
-              <nz-form-control [nzSpan]="14">
+
                 <nz-input-group
                   nzSearch
                   nzSize="large"
@@ -118,8 +115,7 @@
                   nzBackfill
                   #auto
                 ></nz-autocomplete>
-              </nz-form-control>
-            </nz-form-item>
+
           </form>
         </div>
       </div>
