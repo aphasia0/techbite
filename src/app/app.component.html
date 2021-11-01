@@ -63,7 +63,7 @@
   <nz-layout>
     <nz-header>
 
-      <div nz-row nzJustify="start" class="app-header bg-white dark:bg-green-900 dark:text-white">
+      <div nz-row nzJustify="center" class="app-header bg-white dark:bg-primary dark:text-white">
         <div
           nz-col
           nzSpan="3"
@@ -83,12 +83,12 @@
           nzSpan=3
           class="py-6"
         >
-          <nz-switch [ngModel]="true" (ngModelChange)="call($event)" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"></nz-switch>
+          <nz-switch [ngModel]="false" (ngModelChange)="call($event)" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"></nz-switch>
         </div>
         <div nz-col nzSpan="0" nzMd="6"></div>
         <div
           nz-col
-          nzSpan="18"
+          nzSpan="17"
           nzMd="12"
           class="search-input py-6"
         >
@@ -125,8 +125,8 @@
         </div>
       </div>
     </nz-header>
-    <nz-content>
-      <div class="inner-content dark:bg-gray-900 dark:text-white">
+    <nz-content class="dark:bg-gray-800">
+      <div class="inner-content bg-white dark:bg-gray-900 dark:text-white">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
