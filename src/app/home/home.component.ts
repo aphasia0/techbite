@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(private scully: ScullyRoutesService) {}
 
   ngOnInit() {
+    document.documentElement.classList.add('dark')
     // debug current pages
     this.links$.subscribe((links) => {
       console.log(links);

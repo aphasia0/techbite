@@ -18,27 +18,29 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import {NzSwitchModule} from "ng-zorro-antd/switch";
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ScullyLibModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzAutocompleteModule,
-    NzInputModule,
-    NzButtonModule,
-    NzGridModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ScullyLibModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzMenuModule,
+        NzAutocompleteModule,
+        NzInputModule,
+        NzButtonModule,
+        NzGridModule,
+        NzSwitchModule
+    ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })

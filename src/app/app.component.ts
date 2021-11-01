@@ -15,8 +15,10 @@ export class AppComponent {
   isCollapsed = false;
 
   links: ScullyRoute[] | undefined;
+  isDark: any;
 
   constructor(private scully: ScullyRoutesService, private router: Router) {
+
     this.scully.available$
       .pipe(map((routes) => routes.filter((route) => route.route.startsWith('/blog/'))))
       .subscribe((x) => (this.links = x));
@@ -36,5 +38,11 @@ export class AppComponent {
       this.router.navigate(route);
     }
 
+  }
+
+  call(ss: any) {
+    console.log("",ss)
+    console.log("",this.isDark)
+    ss ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
   }
 }

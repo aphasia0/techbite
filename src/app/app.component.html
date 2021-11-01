@@ -52,8 +52,10 @@
         </ul>
       </div>
       <div style="background: #053017;">
-        <a href="https://twitter.com/aphasia0" target="_blank" ><i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="twitter" nzTheme="outline"></i></a>
-        <a href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank" ><i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="linkedin" nzTheme="outline"></i></a>
+        <a href="https://twitter.com/aphasia0" target="_blank"><i style="padding:10px;font-size: 33px;color: white;"
+                                                                  nz-icon nzType="twitter" nzTheme="outline"></i></a>
+        <a href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank"><i
+          style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="linkedin" nzTheme="outline"></i></a>
       </div>
 
     </div>
@@ -61,68 +63,70 @@
   <nz-layout>
     <nz-header>
 
-      <div nz-row nzJustify="start" class="app-header">
+      <div nz-row nzJustify="start" class="app-header bg-white dark:bg-green-900 dark:text-white">
         <div
           nz-col
-          nzXs="3"
-          nzSm="3"
-          nzMd="3"
-          nzLg="12"
-          nzXl="12"
+          nzSpan="3"
           class="header-trigger"
-          (click)="isCollapsed = !isCollapsed"
+
         >
           <i
+            (click)="isCollapsed = !isCollapsed"
             class="trigger"
             nz-icon
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></i>
-        </div>
 
+        </div>
         <div
           nz-col
-          nzXs="21"
-          nzSm="21"
-          nzMd="21"
-          nzLg="12"
-          nzXl="12"
-          class="search-input"
+          nzSpan=3
+          class="py-6"
+        >
+          <nz-switch [ngModel]="true" (ngModelChange)="call($event)" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"></nz-switch>
+        </div>
+        <div nz-col nzSpan="0" nzMd="6"></div>
+        <div
+          nz-col
+          nzSpan="18"
+          nzMd="12"
+          class="search-input py-6"
         >
 
           <form #f="ngForm" nz-form (ngSubmit)="search(f)">
 
-                <nz-input-group
-                  nzSearch
-                  nzSize="large"
-                  [nzAddOnAfter]="suffixIconButton"
-                >
-                  <input
-                    class="search-box"
-                    name="search"
-                    placeholder="Search"
-                    nz-input
-                    ngModel
-                    (input)="onInput($event)"
-                    [nzAutocomplete]="auto"
-                  />
-                </nz-input-group>
-                <ng-template #suffixIconButton>
-                  <button nz-button nzType="primary" nzSize="large" nzSearch>
-                    <i nz-icon nzType="search" nzTheme="outline"></i>
-                  </button>
-                </ng-template>
-                <nz-autocomplete
-                  [nzDataSource]="options"
-                  nzBackfill
-                  #auto
-                ></nz-autocomplete>
+            <nz-input-group
+              nzSearch
+              nzSize="large"
+              [nzAddOnAfter]="suffixIconButton"
+            >
+              <input
+                class="search-box"
+                name="search"
+                placeholder="Search"
+                nz-input
+                ngModel
+                (input)="onInput($event)"
+                [nzAutocomplete]="auto"
+              />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+              <button nz-button nzType="primary" nzSize="large" nzSearch>
+                <i nz-icon nzType="search" nzTheme="outline"></i>
+              </button>
+            </ng-template>
+            <nz-autocomplete
+              [nzDataSource]="options"
+              nzBackfill
+              #auto
+            ></nz-autocomplete>
 
           </form>
         </div>
       </div>
     </nz-header>
     <nz-content>
-      <div class="inner-content">
+      <div class="inner-content dark:bg-gray-900 dark:text-white">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
