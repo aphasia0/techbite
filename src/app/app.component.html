@@ -62,7 +62,47 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
+      <div>
+        <div class="grid grid-cols-6">
+          <div class="bg-red-300 p-2">  <i
+            (click)="isCollapsed = !isCollapsed"
+            class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+          ></i></div>
+          <div class="bg-red-500 col-span-2 p-2"> <nz-switch [ngModel]="false" (ngModelChange)="call($event)" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"></nz-switch>
+          </div>
+          <div class="bg-red-600 col-span-3 py-10">   <form #f="ngForm" nz-form (ngSubmit)="search(f)">
 
+            <nz-input-group
+              nzSearch
+              nzSize="large"
+              [nzAddOnAfter]="suffixIconButton"
+            >
+              <input
+                class="search-box"
+                name="search"
+                placeholder="Search"
+                nz-input
+                ngModel
+                (input)="onInput($event)"
+                [nzAutocomplete]="auto"
+              />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+              <button nz-button nzType="primary" nzSize="large" nzSearch>
+                <i nz-icon nzType="search" nzTheme="outline"></i>
+              </button>
+            </ng-template>
+            <nz-autocomplete
+              [nzDataSource]="options"
+              nzBackfill
+              #auto
+            ></nz-autocomplete>
+
+          </form></div>
+        </div>
+      </div>  
       <div nz-row nzJustify="center" class="app-header bg-white dark:bg-primary dark:text-white">
         <div
           nz-col
@@ -125,7 +165,7 @@
         </div>
       </div>
     </nz-header>
-    <nz-content class="dark:bg-gray-800">
+    <nz-content class="dark:bg-gray-500">
       <div class="inner-content bg-white dark:bg-gray-900 dark:text-white">
         <router-outlet></router-outlet>
       </div>
