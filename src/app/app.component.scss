@@ -16,14 +16,6 @@ nz-sider {
 }
 
 
-
-.header-trigger {
-  height: 64px;
-  padding: 20px 24px;
-  font-size: 40px;
-  transition: all .3s,padding 0s;
-}
-
 .trigger:hover {
   color: #1890ff;
 }
@@ -35,7 +27,6 @@ nz-sider {
   overflow: hidden;
   line-height: 64px;
   background: #053017;
-  transition: all .3s;
 }
 
 
@@ -91,4 +82,10 @@ nz-content {
 
 .right-layout {
   margin-left: 256px;
+  transition: all .2s;
+
+}
+.right-layout-0 {
+  margin-left: 0px;
+  transition: all .2s;
 }
