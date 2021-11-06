@@ -6,22 +6,22 @@
 }
 
 .app-layout {
-  height: 100vh;
-}
-
-.menu-sidebar {
-
-  position: relative;
-  z-index: 10;
   min-height: 100vh;
-  box-shadow: 2px 0 6px rgba(0,21,41,.35);
 }
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+}
+
+
 
 .header-trigger {
   height: 64px;
   padding: 20px 24px;
   font-size: 40px;
-  //transition: all .3s,padding 0s;
+  transition: all .3s,padding 0s;
 }
 
 .trigger:hover {
@@ -67,15 +67,11 @@ nz-header {
 }
 
 .app-header {
-  position: relative;
-  height: initial;
-  line-height: initial;
-
-  padding: 0;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
 }
 
 nz-content {
+
   overflow: auto;
 }
 
@@ -91,4 +87,8 @@ nz-content {
 .ant-layout-header{
   height: initial;
   line-height: inherit;
+}
+
+.right-layout {
+  margin-left: 256px;
 }
