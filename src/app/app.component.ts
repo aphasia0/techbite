@@ -45,4 +45,15 @@ export class AppComponent {
     console.log("",this.isDark)
     ss ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
   }
+
+  test() {
+    if (this.shouldBeClosed()){
+      this.isCollapsed = true;  //We close automatically the sidebare for lower resolution
+    }
+  }
+
+  shouldBeClosed(): boolean{
+    return window.innerWidth < 768;
+  }
+
 }

@@ -10,7 +10,7 @@
   >
 
         <div class="sidebar-logo">
-          <a href="/home" target="_blank">
+          <a href="/home" target="_blank" (click)="test()">
             <img
               [src]="
             isCollapsed
@@ -28,18 +28,18 @@
           nzMode="inline"
           [nzInlineCollapsed]="isCollapsed"
         >
-          <li nzMatchRouter routerLink="/home" nz-menu-item>
+          <li (click)="test()" nzMatchRouter routerLink="/home" nz-menu-item>
             <i nz-icon nzType="home"></i>
             <span>Home</span>
           </li>
           <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
             <ul>
-              <li nz-menu-item nzMatchRouter *ngFor="let page of links">
+              <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of links">
                 <a [routerLink]="page.route">{{ page.title }}</a>
               </li>
             </ul>
           </li>
-          <li nzMatchRouter routerLink="/about" nz-menu-item>
+          <li nzMatchRouter (click)="test()" routerLink="/about" nz-menu-item>
             <i nz-icon nzType="smile"></i>
             <span>About</span>
           </li>
@@ -55,10 +55,10 @@
 
 
   </nz-sider>
-  <nz-layout [ngClass]="isCollapsed ? 'right-layout-0' : 'right-layout'">
-    <nz-header>
+  <nz-layout [ngClass]="!isCollapsed && !shouldBeClosed()  ? 'right-layout' : 'right-layout-0'">
+    <nz-header >
 
-        <div class=" app-header grid grid-cols-2 md:grid-cols-6 items-center bg-white dark:bg-primary dark:text-white">
+        <div [ngClass]="!isCollapsed && shouldBeClosed() ? 'right-layout' : 'right-layout-0'" class=" app-header grid grid-cols-2 md:grid-cols-6 items-center bg-white dark:bg-primary dark:text-white">
           <div class="text-2xl p-3 col-span-2 md:col-span-3 "><i
             (click)="isCollapsed = !isCollapsed"
             class="trigger"
