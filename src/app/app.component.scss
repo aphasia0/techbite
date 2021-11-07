@@ -19,6 +19,7 @@ nz-sider {
 
 .trigger:hover {
   color: #1890ff;
+  cursor:pointer;
 }
 
 .sidebar-logo {
@@ -89,4 +90,9 @@ nz-content {
 .right-layout-0 {
   margin-left: 0px;
   transition: all .2s;
+}
+
+.ant-layout-sider-children{
+  height: 90%;
+  border: 4px solid black;
 }

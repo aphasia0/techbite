@@ -8,100 +8,102 @@
     [nzTrigger]="null"
     [nzCollapsedWidth]="0"
   >
-
-        <div class="sidebar-logo">
-          <a href="/home" target="_blank" (click)="test()">
-            <img
-              [src]="
+    <div class="h-full flex flex-col">
+      <div class="sidebar-logo">
+        <a href="/home" target="_blank" (click)="test()">
+          <img
+            [src]="
             isCollapsed
               ? 'assets/default-no-text.svg'
               : 'assets/default-monochrome.svg'
           "
-              alt="logo"
-            />
-          </a>
-        </div>
-        <ul
-          nz-menu
-          nzOpen
-          nzTheme="dark"
-          nzMode="inline"
-          [nzInlineCollapsed]="isCollapsed"
-        >
-          <li (click)="test()" nzMatchRouter routerLink="/home" nz-menu-item>
-            <i nz-icon nzType="home"></i>
-            <span>Home</span>
-          </li>
-          <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
-            <ul>
-              <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of links">
-                <a [routerLink]="page.route">{{ page.title }}</a>
-              </li>
-            </ul>
-          </li>
-          <li nzMatchRouter (click)="test()" routerLink="/about" nz-menu-item>
-            <i nz-icon nzType="smile"></i>
-            <span>About</span>
-          </li>
-
-
-        </ul>
-      <div  [ngClass]="isCollapsed ? '' : 'fixed bottom-0 left-0'">
-        <a href="https://twitter.com/aphasia0" target="_blank"><i style="padding:10px;font-size: 33px;color: white;"
-                                                                  nz-icon nzType="twitter" nzTheme="outline"></i></a>
-        <a href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank"><i
-          style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="linkedin" nzTheme="outline"></i></a>
+            alt="logo"
+          />
+        </a>
       </div>
+      <ul
+        nz-menu
+        nzOpen
+        nzTheme="dark"
+        nzMode="inline"
+        [nzInlineCollapsed]="isCollapsed"
+      >
+        <li (click)="test()" nzMatchRouter routerLink="/home" nz-menu-item>
+          <i nz-icon nzType="home"></i>
+          <span>Home</span>
+        </li>
+        <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
+          <ul>
+            <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of links">
+              <a [routerLink]="page.route">{{ page.title }}</a>
+            </li>
+          </ul>
+        </li>
+        <li nzMatchRouter (click)="test()" routerLink="/about" nz-menu-item>
+          <i nz-icon nzType="smile"></i>
+          <span>About</span>
+        </li>
 
+      </ul>
+
+      <div class="mt-auto ml-3">
+        <a href="https://twitter.com/aphasia0" target="_blank">
+          <i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="twitter" nzTheme="outline"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank">
+          <i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="linkedin" nzTheme="outline"></i>
+        </a>
+      </div>
+    </div>
 
   </nz-sider>
   <nz-layout [ngClass]="!isCollapsed && !shouldBeClosed()  ? 'right-layout' : 'right-layout-0'">
-    <nz-header >
+    <nz-header [ngClass]="!isCollapsed && shouldBeClosed() ? 'right-layout' : 'right-layout-0'">
 
-        <div [ngClass]="!isCollapsed && shouldBeClosed() ? 'right-layout' : 'right-layout-0'" class=" app-header grid grid-cols-2 md:grid-cols-6 items-center bg-white dark:bg-primary dark:text-white">
-          <div class="text-2xl p-3 col-span-2 md:col-span-3 "><i
-            (click)="isCollapsed = !isCollapsed"
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></i>
-            <span class="mx-5 float-right md:mx-10 md:float-none">
+      <div class=" app-header grid grid-cols-2 md:grid-cols-6 items-center bg-white dark:bg-primary dark:text-white">
+        <div class="text-2xl p-3 col-span-2 md:col-span-3 "><i
+          (click)="isCollapsed = !isCollapsed"
+          class="trigger"
+          nz-icon
+          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        ></i>
+          <span class="mx-5 float-right md:mx-10 md:float-none">
             <nz-switch [ngModel]="false" (ngModelChange)="call($event)" nzCheckedChildren="Dark"
                        nzUnCheckedChildren="Light"></nz-switch>
           </span>
-          </div>
-          <div class="col-span-4 p-3 md:col-span-3">
-            <form #f="ngForm" nz-form (ngSubmit)="search(f)">
-
-              <nz-input-group
-                nzSearch
-                nzSize="large"
-                [nzAddOnAfter]="suffixIconButton"
-              >
-                <input
-                  class="search-box"
-                  name="search"
-                  placeholder="Search"
-                  nz-input
-                  ngModel
-                  (input)="onInput($event)"
-                  [nzAutocomplete]="auto"
-                />
-              </nz-input-group>
-              <ng-template #suffixIconButton>
-                <button nz-button nzType="primary" nzSize="large" nzSearch>
-                  <i nz-icon nzType="search" nzTheme="outline"></i>
-                </button>
-              </ng-template>
-              <nz-autocomplete
-                [nzDataSource]="options"
-                nzBackfill
-                #auto
-              ></nz-autocomplete>
-
-            </form>
-          </div>
         </div>
+        <div class="col-span-4 p-3 md:col-span-3">
+          <form #f="ngForm" nz-form (ngSubmit)="search(f)">
+
+            <nz-input-group
+              nzSearch
+              nzSize="large"
+              [nzAddOnAfter]="suffixIconButton"
+            >
+              <input
+                class="search-box"
+                name="search"
+                placeholder="Search"
+                nz-input
+                ngModel
+                (input)="onInput($event)"
+                [nzAutocomplete]="auto"
+              />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+              <button nz-button nzType="primary" nzSize="large" nzSearch>
+                <i nz-icon nzType="search" nzTheme="outline"></i>
+              </button>
+            </ng-template>
+            <nz-autocomplete
+              [nzDataSource]="options"
+              nzBackfill
+              #auto
+            ></nz-autocomplete>
+
+          </form>
+        </div>
+      </div>
     </nz-header>
     <nz-content class="dark:bg-gray-500">
       <div class="inner-content bg-white dark:bg-gray-900 dark:text-white">
