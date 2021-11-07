@@ -14,10 +14,15 @@ declare var ng: any;
 })
 export class BlogComponent implements OnInit {
   title: string | undefined;
+  description: string | undefined;
 
   ngOnInit() {}
 
   constructor(private scully: ScullyRoutesService) {
-    scully.getCurrent().subscribe( x => this.title = x.title)
+    scully.getCurrent().subscribe( x => {
+      this.title = x.title
+      this.description = x.description
+      console.log(x.subtitle)
+    })
   }
 }
