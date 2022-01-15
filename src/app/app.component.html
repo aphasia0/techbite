@@ -32,7 +32,7 @@
           <i nz-icon nzType="home"></i>
           <span>Home</span>
         </li>
-        <li nz-submenu nzOpen nzTitle="Blog" nzIcon="highlight">
+        <li nz-submenu nzOpen nzTitle="Pages" nzIcon="highlight">
           <ul>
             <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of links">
               <a [routerLink]="page.route">{{ page.title }}</a>
@@ -108,7 +108,7 @@
       </div>
     </nz-header>
     <nz-content class="dark:bg-gray-500">
-      <div class="inner-content bg-white dark:bg-gray-900 dark:text-white">
+      <div class="inner-content p-6 md:px-24 xl:px-36 bg-white dark:bg-gray-900 dark:text-white">
         <router-outlet></router-outlet>
       </div>
     </nz-content>
