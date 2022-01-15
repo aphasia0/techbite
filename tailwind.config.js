@@ -5,6 +5,7 @@ process.env.TAILWIND_MODE = guessProductionMode() ? 'build' : 'watch';
 module.exports = {
     prefix: '',
     purge: {
+      enabled: true,
       content: [
         './src/**/*.{html,ts,css,scss,sass,less,styl}',
       ]

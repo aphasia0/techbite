@@ -53,13 +53,15 @@
         <a href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank">
           <i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="linkedin" nzTheme="outline"></i>
         </a>
+        <a href="https://github.com/aphasia0" target="_blank">
+          <i style="padding:10px;font-size: 33px;color: white;" nz-icon nzType="github" nzTheme="outline"></i>
+        </a>
       </div>
     </div>
 
   </nz-sider>
   <nz-layout [ngClass]="!isCollapsed && !shouldBeClosed()  ? 'right-layout' : 'right-layout-0'">
     <nz-header [ngClass]="!isCollapsed && shouldBeClosed() ? 'right-layout' : 'right-layout-0'">
-
       <div class=" app-header grid grid-cols-2 md:grid-cols-6 items-center bg-white dark:bg-primary dark:text-white">
         <div class="text-2xl p-3 col-span-2 md:col-span-3 "><i
           (click)="isCollapsed = !isCollapsed"
