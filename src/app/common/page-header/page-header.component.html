@@ -1,4 +1,9 @@
-<div>
+<div class="grid justify-items-start">
   <h1>{{title}}</h1>
+</div>
+<div class="grid justify-items-start">
   <h3 class="dark:text-white font-medium text-gray-500 mt-2 mb-2">{{subtitle}}</h3>
+</div>
+<div class="py-4">
+  <img [src]="image" [ngClass]="imageStyle === 'cover' ? 'object-cover':'object-scale-down'" class="object-cover rounded-xl h-64 w-full">
 </div>

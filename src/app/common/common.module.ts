@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PageHeaderComponent } from './page-header/page-header.component';
+import {CommonModule} from "@angular/common";
 
 
 
@@ -10,6 +11,8 @@ import { PageHeaderComponent } from './page-header/page-header.component';
   exports: [
     PageHeaderComponent
   ],
-  imports: []
+  imports: [
+    CommonModule
+  ]
 })
 export class AppCommonModule { }

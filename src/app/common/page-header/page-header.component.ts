@@ -11,6 +11,12 @@ export class PageHeaderComponent implements OnInit {
   @Input()
   subtitle: string|undefined;
 
+  @Input()
+  image: string|undefined;
+  //cover or scale-down
+  @Input()
+  imageStyle: string = 'cover';
+
   constructor() { }
 
   ngOnInit(): void {

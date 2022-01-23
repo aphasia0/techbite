@@ -1,17 +1,9 @@
 
 <app-page-header
   [title]="title"
-  [subtitle]="description"></app-page-header>
+  [subtitle]="subtitle"
+  [image]="image"></app-page-header>
 
-<div nz-row nzJustify="center">
-  <div nz-col nzSpan="12" class="blog-title"><h2 >{{title}}</h2></div>
-</div>
 <!-- This is where Scully will inject the static HTML -->
 <scully-content></scully-content>
-<h1 class="blog-tail">End of content</h1>
-<div nz-row>
-  <div nz-col nzSpan="6">col-6</div>
-  <div nz-col nzSpan="6">col-6</div>
-  <div nz-col nzSpan="6">col-6</div>
-  <div nz-col nzSpan="6">col-6</div>
-</div>
+

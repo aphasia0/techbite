@@ -263,3 +263,214 @@ Using stored unhandled routes!.
 Using stored unhandled routes!.
    To discover new routes in the angular app use "npm run scully -- --scanRoutes"
 ----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+---------------------------------- The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 10:
+    published: true
+             ^
+
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+---------------------------------- The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 10:
+    published: false
+             ^
+
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+---------------------------------- The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 10:
+    published: true
+             ^
+
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+---------------------------------- The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 10:
+    published: true
+             ^
+
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+-----------------------------------
+The port "2667" is not available for the live-reload server.
+live reload will not be available. You can configure a different port in the config file.
+-----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+-----------------------------------
+The port "2667" is not available for the live-reload server.
+live reload will not be available. You can configure a different port in the config file.
+-----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+Route "/about" not provided by angular appRoute "/home" not provided by angular app
+
+ The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 10:
+    published: true
+             ^
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+---------------------------------- The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 6:
+    image: 'tailwindcss.png'
+         ^
+
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+---------------------------------- The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 10:
+    published: true
+             ^
+
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+---------------------------------- The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 10:
+    published: true
+             ^
+
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+---------------------------------- The router plugin "contentFolder has thrown the below error,
+              while trying to render route "unknown"
+              Scully will exitYAMLException: can not read a block mapping entry; a multiline key may not be an implicit key at line 4, column 10:
+    published: true
+             ^
+
+
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
+
+-----------------------------------
+The port "2667" is not available for the live-reload server.
+live reload will not be available. You can configure a different port in the config file.
+-----------------------------------
+
+----------------------------------
+Using stored unhandled routes!.
+   To discover new routes in the angular app use "npm run scully -- --scanRoutes"
+----------------------------------
