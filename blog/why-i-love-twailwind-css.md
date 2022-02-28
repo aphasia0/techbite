@@ -1,7 +1,7 @@
 ---
-title: 2021-08-13-blog
+title: Why I love Tailwind CSS
 description: blog description
-subtitle: 'subtitle'
+subtitle: 'In one word: Laziness'
 image: 'assets/tailwind.jpeg'
 published: true
 ---
@@ -10,11 +10,11 @@ In this article I'm going to describe *four* main reason why I love so much
 [tailwindcss](https://tailwindcss.com).
 
 
-## 1. Speed up the development process
+# 1. Speed up the development process
 
 Usually whenever you need to add style to your page you need to context 
 switch from one file (.html) to another (.css). 
-With tailwind css you have an Utility-First tool where almost all the needed css
+With tailwind css you have a Utility-First tool where almost all the needed css
 instruction are made available in pre-existing classes. 
 You need only to use them directly in the .html file without writing a single line of CSS.
 
@@ -79,35 +79,69 @@ To this:
 </div>
 ```  
 
-Wait a moment, I know what you’re thinking. What about the [separation of concern](https://en.wikipedia.org/wiki/Separation_of_concerns) design principle.
+Wait a moment, I know what you’re thinking. What about the [separation of concern](https://en.wikipedia.org/wiki/Separation_of_concerns) design principle:
 
-```
-Each section addresses a separate concern, a set of information that affects the code of a computer program
-Obtaining the exact same design.
-```
+
+## Each section addresses a separate concern, a set of information that affects the code of a computer program Obtaining the exact same design.
 That is right, but think a moment to the benefit you gain:
 
-* You aren’t wasting energy inventing class names. And trust me, when you invent a css class name then you need to remember it in order to “reuse” when needed again. And often you
+
+* You aren’t wasting energy inventing class names. And trust me, when you come up with a css class name then you need to remember it in order to “reuse” it effectively
 
 * Near zero context switch: you can focus on your page layout
 
 When you realize how _productive_ you can be working exclusively in HTML with predefined utility classes, working any other way will feel like torture.
 
-## 2. Responsive Design made easy
+# 2. Responsive Design made easy
+
+There are lots of utility, framework or library that makes this possible, but in this Tailwind CSS really shines. By default, Tailwind uses a mobile first breakpoint system, where the default is the mobile screen, then 
+if you want to change the layout you can simply override it:
 
 
-## 3. Ready For Production
+```html
+<!-- This will center text on mobile, and left align it on screens 640px and wider -->
+<div class="text-center sm:text-left"></div>
 
-Tailwind CSS is incredibly performance focused and aims to produce the smallest CSS file possible by only generating the CSS you are actually using in your project.
+```
 
-During the build phase for production tailwind is able to cut all the classes not need from your css. Creating a css so small that you don’t have to worry about complex solutions like code-splitting your CSS for each page, and can instead just ship a single small CSS file that’s downloaded once and cached until you redeploy your site.
+# 3. Dark Mode in one keyword
 
-## 3. Ready For Production
+Here how to set the layout for dark mode, it is done exactly in the same file together with the bright version:
 
-## Credits
+```html
+ <!-- Will be automatically black or white depeneding on the operating system preference -->
+  <div class="bg-white dark:bg-black">
+    <!-- ... -->
+  </div>
 
-*Markdown Here* was coded on the shoulders of giants.
+```
 
-* Markdown-to-HTML: [chjj / marked](https://github.com/chjj/marked)
-* Syntax highlighting: [isagalaev / highlight.js](https://github.com/isagalaev/highlight.js)
-* HTML-to-text: [mtrimpe / jsHtmlToText](https://github.com/mtrimpe/jsHtmlToText)
+If you want to manually handle this just put a *dark* class  in the HTML tree:
+
+```html
+<!-- Dark mode enabled -->
+<html class="dark">
+<body>
+  <!-- Will be black -->
+  <div class="bg-white dark:bg-black">
+    <!-- ... -->
+  </div>
+</body>
+</html>
+
+```
+# 4. Ready For Production
+
+Tailwind CSS is incredibly performance focused and aims to produce the smallest CSS file possible by only generating the CSS you are actually using in your project.
+
+During the build phase for production tailwind is able to cut all the classes not needed from your css file. Creating a css file so small you don’t have to worry about complex solutions like code-splitting your CSS for each page, and can instead just ship a single small CSS file that’s downloaded once and cached until you redeploy your site.
+
+
+
+# Credits
+
+[Tailwind CSS](https://tailwindcss.com)
+
+[Tailwind CSS: Dark Mode](https://tailwindcss.com/docs/dark-mode)
+
+[Tailwind CSS: Responsive Design](https://tailwindcss.com/docs/responsive-design)

@@ -1,15 +1,18 @@
 h1 {
-  color:rgb(51, 6, 37);
-  background-color: rgb(248, 211, 236);
-  padding: 5px;
-  border-radius: 5px;
-  width: fit-content;
-}
-.blog-tile{
-  background-color: rebeccapurple;
+  @apply text-3xl bg-primarylight  dark:text-white dark:bg-gray-50 font-extrabold mt-6 mb-6 rounded-md
 }
 
+h2 {
+  @apply mt-3 mb-3 ml-10 text-gray-900 italic
+}
 
-.blog-title{
-  background-color: rebeccapurple;
+p{
+  @apply mt-3 mb-3
+}
+a{
+  @apply underline
+}
+
+li{
+  @apply list-disc 
 }

@@ -5,9 +5,11 @@ h1{
   @apply text-3xl dark:text-white font-extrabold mt-2 mb-2
 }
 h3{
+  @apply text-2xl dark:text-white font-light
+}
+body{
   @apply text-xl dark:text-white font-light
 }
-
 @import 'tailwindcss/utilities';
 /* include CSS for prism toolbar */
 @import '~prismjs/plugins/toolbar/prism-toolbar.css';
