@@ -6,7 +6,9 @@ export const config: ScullyConfig = {
   projectRoot: "./src",
   projectName: "techbite",
   outDir: './dist/static',
-  puppeteerLaunchOptions: {args: ['--no-sandbox', '--disable-setuid-sandbox'],},
+  puppeteerLaunchOptions: {
+    executablePath: '/snap/bin/chromium',
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],},
   routes: {
     '/blog/:slug': {
       type: 'contentFolder',
