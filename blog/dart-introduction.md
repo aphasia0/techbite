@@ -4,8 +4,6 @@ description: 'blog description'
 subtitle: 'Part 1'
 image: 'assets/dart.jpeg'
 published: true
-slugs:
-    - ___UNPUBLISHED___l13yt49i_12LHHYLkyxXgeXgIya5I8koY5xBf50Nh
 ---
 
 Dart is a client-optimized language developed by Google. In the early days of Dart, it was intended that this language should become a strong alternative to JavaScript in the browser. 
