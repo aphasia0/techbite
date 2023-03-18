@@ -1,10 +1,7 @@
 import {Component} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
-import {ScullyRoute, ScullyRoutesService} from '@scullyio/ng-lib';
-import {Observable} from 'rxjs';
-import {filter, map, tap} from 'rxjs/operators';
-
+import {blogPages, Page} from "./static.pages";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,18 +10,14 @@ import {filter, map, tap} from 'rxjs/operators';
 export class AppComponent {
   options: string[] | undefined = [] as any;
   isCollapsed = false;
-
-  links: ScullyRoute[] | undefined;
   isDark: any;
+  links: Page[] = blogPages;
+  model:any;
 
-  constructor(private scully: ScullyRoutesService, private router: Router) {
-
-    this.scully.available$
-      .pipe(map((routes) => routes.filter((route) => route.route.startsWith('/blog/'))))
-      .subscribe((x) => (this.links = x));
+  constructor(private router: Router) {
   }
-
   onInput(event: Event): void {
+
     const value = (event.target as HTMLInputElement).value;
     this.options = this.links
       ?.map((x) => (x.title ? x.title : ''))
@@ -32,28 +25,32 @@ export class AppComponent {
   }
 
   search(f: NgForm) {
-    const route = this.links?.filter(x => x.title === f.value.search).map(x => x.route)
+    const route = this.links?.filter(x => x.title === f.value.search).map(x => 'blog/'+x.id)
     console.log(route)
     if (route) {
-      this.router.navigate(route);
+      this.router.navigate(route).then(
+         () => this.model = ''
+      );
     }
 
   }
 
   call(ss: any) {
-    console.log("",ss)
-    console.log("",this.isDark)
     ss ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
   }
 
   test() {
-    if (this.shouldBeClosed()){
+    if (this.shouldBeClosed()) {
       this.isCollapsed = true;  //We close automatically the sidebare for lower resolution
     }
   }
 
-  shouldBeClosed(): boolean{
+  shouldBeClosed(): boolean {
     return window.innerWidth < 768;
   }
 
+  select() {
+    this.options = this.links
+      ?.map((x) => (x.title ? x.title : ''));
+  }
 }

@@ -14,10 +14,11 @@
           <img
             [src]="
             isCollapsed
-              ? 'assets/default-no-text.svg'
-              : 'assets/default-monochrome.svg'
+              ? 'assets/img/default-no-text.svg'
+              : 'assets/img/default-monochrome.svg'
           "
             alt="logo"
+
           />
         </a>
       </div>
@@ -35,7 +36,7 @@
         <li nz-submenu nzOpen nzTitle="Pages" nzIcon="highlight">
           <ul>
             <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of links">
-              <a [routerLink]="page.route">{{ page.title }}</a>
+              <a [routerLink]="'blog/'+page.id">{{ page.title }}</a>
             </li>
           </ul>
         </li>
@@ -79,14 +80,14 @@
               nzSize="large"
               [nzAddOnAfter]="suffixIconButton"
             >
-              <input
-                class="search-box"
-                name="search"
-                placeholder="Search"
-                nz-input
-                ngModel
-                (input)="onInput($event)"
-                [nzAutocomplete]="auto"
+              <input (focus)="select()"
+                     class="search-box"
+                     name="search"
+                     placeholder="Search"
+                     nz-input
+                     [(ngModel)]="model"
+                     (input)="onInput($event)"
+                     [nzAutocomplete]="auto"
               />
             </nz-input-group>
             <ng-template #suffixIconButton>

@@ -1,48 +1,54 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ScullyLibModule } from '@scullyio/ng-lib';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
-import { IconsProviderModule } from './icons-provider.module';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzGridModule } from 'ng-zorro-antd/grid';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NzLayoutModule} from "ng-zorro-antd/layout";
+import {NzMenuModule} from "ng-zorro-antd/menu";
+import {RouterLink, RouterModule, RouterOutlet} from "@angular/router";
+import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
+import {NzButtonModule} from "ng-zorro-antd/button";
+import { MarkdownModule } from 'ngx-markdown';
+import {PagesModule} from "./pages/pages.module";
+import { BlogPageComponent } from './pages/blog-page/blog-page.component';
+
+
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-    imports: [
-      NoopAnimationsModule  ,
-        BrowserModule,
-        AppRoutingModule,
-        ScullyLibModule,
-        FormsModule,
-        HttpClientModule,
-       BrowserAnimationsModule,
-        IconsProviderModule,
-        NzLayoutModule,
-        NzMenuModule,
-        NzAutocompleteModule,
-        NzInputModule,
-        NzButtonModule,
-        NzGridModule,
-        NzSwitchModule
-    ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  imports: [
+    RouterModule.forRoot([]),
+    MarkdownModule.forRoot(),
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NzLayoutModule,
+    NzMenuModule,
+    RouterLink,
+    NzIconModule,
+    NzSwitchModule,
+    NzInputModule,
+    NzAutocompleteModule,
+    RouterOutlet,
+    NzButtonModule,
+    PagesModule
+  ],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

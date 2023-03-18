@@ -1,30 +1,17 @@
-const { guessProductionMode } = require("@ngneat/tailwind");
-
-process.env.TAILWIND_MODE = guessProductionMode() ? 'build' : 'watch';
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-    prefix: '',
-    purge: {
-      enabled: false,
-      content: [
-        './src/**/*.{html,ts,css,scss,sass,less,styl}',
-      ]
-    },
-    darkMode: 'class', // or 'media' or 'class'
-    theme: {
-      backgroundColor: theme => ({
-        ...theme('colors'),
+  content: [
+    "./src/**/*.{html,ts}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
         'primary': '#053017',
         'primarylight': 'rgba(25,238,118,0.78)',
         'secondary': '#ffed4a',
         'danger': '#e3342f',
-      })
-    },
-    variants: {
-      extend: {},
-    },
-    plugins: [require('@tailwindcss/typography')],
-};
-
-
-
+      }
+  }},
+  plugins: ['@tailwindcss/typography']
+}
