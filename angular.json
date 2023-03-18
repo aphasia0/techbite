@@ -30,7 +30,7 @@
               "src/favicon.ico",
               "src/googlea8c4c713dfc66128.html",
               "src/robots.txt",
-              "src/sistemap.txt",
+              "src/sitemap.txt",
               "src/assets",
               {
                 "glob": "**/*",
@@ -111,7 +111,7 @@
               "src/favicon.ico",
               "src/googlea8c4c713dfc66128.html",
               "src/robots.txt",
-              "src/sistemap.txt",
+              "src/sitemap.txt",
               "src/assets"
             ],
             "styles": [
