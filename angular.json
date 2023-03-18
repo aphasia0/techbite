@@ -26,7 +26,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/_redirects",
               "src/favicon.ico",
+              "src/googlea8c4c713dfc66128.html",
+              "src/robots.txt",
+              "src/sistemap.txt",
               "src/assets",
               {
                 "glob": "**/*",
@@ -103,7 +107,11 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/_redirects",
               "src/favicon.ico",
+              "src/googlea8c4c713dfc66128.html",
+              "src/robots.txt",
+              "src/sistemap.txt",
               "src/assets"
             ],
             "styles": [
