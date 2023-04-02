@@ -7,17 +7,18 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PageHeaderComponent implements OnInit {
   @Input()
-  title: string|undefined;
+  title: string | undefined;
   @Input()
-  subtitle: string|undefined;
+  subtitle: string | undefined;
 
   @Input()
-  image: string|undefined;
+  image: string | undefined;
   //cover or scale-down
   @Input()
-  imageStyle: string = 'cover';
+  imageStyle: string | undefined;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

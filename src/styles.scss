@@ -11,4 +11,12 @@ h3{
 body{
   @apply text-xl dark:text-white font-light
 }
+p{
+  @apply pt-5
+}
+
+ul{
+
+  @apply list-disc pt-3 pl-3
+}
 @tailwind utilities;

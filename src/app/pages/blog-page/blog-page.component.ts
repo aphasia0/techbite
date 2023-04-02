@@ -30,7 +30,8 @@ export class BlogPageComponent implements OnInit, OnDestroy {
           title: "Sorry, page not found",
           image: "assets/img/sorry.jpg",
           subtitle: "",
-          filename: ""
+          filename: "",
+          imageStyle: "cover"
         }
       }
     });

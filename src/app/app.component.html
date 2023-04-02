@@ -35,8 +35,8 @@
         </li>
         <li nz-submenu nzOpen nzTitle="Pages" nzIcon="highlight">
           <ul>
-            <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of links">
-              <a [routerLink]="'blog/'+page.id">{{ page.title }}</a>
+            <li   nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of links">
+              <a  style="flex: auto" class="truncate" [routerLink]="'blog/'+page.id">{{ page.title }}</a>
             </li>
           </ul>
         </li>

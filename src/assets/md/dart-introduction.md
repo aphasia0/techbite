@@ -7,19 +7,19 @@ Now the Dart language has been pivoted to become a great client-side language in
 
 Here below a simple snippet of code. The execution starts from the *main* function, we declare a variable - notice without a type, we'll talk about this later - and call the function *printInteger*.
 
-```html  
-// Define a function.
-void printInteger(int aNumber) {
-  print('The number is $aNumber.'); // Print to console.
-}
-
-// This is where the app starts executing.
-void main() {
-  var number = 42; // Declare and initialize a variable.
-  printInteger(number); // Call a function.
-}
-
-```
+  ```html  
+  // Define a function.
+  void printInteger(int aNumber) {
+    print('The number is $aNumber.'); // Print to console.
+  }
+  
+  // This is where the app starts executing.
+  void main() {
+    var number = 42; // Declare and initialize a variable.
+    printInteger(number); // Call a function.
+  }
+  
+  ```
 
 # Every variable refers to an object
 

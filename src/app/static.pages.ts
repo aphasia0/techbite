@@ -4,6 +4,7 @@ export interface Page {
   filename: string
   image: string;
   subtitle: string;
+  imageStyle: string;
 }
 
 export const blogPages: Page []= [
@@ -12,13 +13,23 @@ export const blogPages: Page []= [
     title: "Why I love tailwind css",
     subtitle: "In one word: Laziness",
     filename: "assets/md/why-i-love-tailwind-css.md",
-    image: "assets/img/tailwind.jpeg"
+    image: "assets/img/tailwind.jpeg",
+    imageStyle: "cover"
   },
   {
     id: "dart-tour-part-1",
     title: "Dart Tour",
     subtitle: "Part 1",
     filename: "assets/md/dart-introduction.md",
-    image: "assets/img/dart.jpeg"
+    image: "assets/img/dart.jpeg",
+    imageStyle: "cover"
+  },
+  {
+    id: "lombok-yes-i-like-it",
+    title: "Should you use Lombok project in modern Java?",
+    subtitle: "Short answer: yes",
+    filename: "assets/md/lombok.md",
+    image: "assets/img/lombok.webp",
+    imageStyle: "scale"
   }
 ]
