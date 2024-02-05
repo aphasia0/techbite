@@ -49,7 +49,7 @@ Some developers have raised concerns about the use of Lombok in production code.
 Some argue that the generated code may not be as efficient as hand-written code, and that the annotations may make the code less readable and maintainable in the long term. Additionally, some developers may find it challenging to debug generated code.
 
 # Java Records
-Staring from java 14 we have some similar functionality built in into the language
+Starting from java 14 we have some similar functionality built in into the language
 
 ```java 
 public record Person (String name, String address) {}
