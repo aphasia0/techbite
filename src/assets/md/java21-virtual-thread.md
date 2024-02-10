@@ -19,7 +19,7 @@ static String formatterPatternSwitch(Object obj) {
     };
 }
 ```
-However, the most interesting feature by far is for me is [Virtual Threads](https://openjdk.org/jeps/444).
+However, the most interesting feature by far is [Virtual Threads](https://openjdk.org/jeps/444).
 
 It has been a long journey for Virtual Thread, Project Loom was started as an attempt by the OpenJDK community to introduce a lightweight concurrency construct to Java.
 
