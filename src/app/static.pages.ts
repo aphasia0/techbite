@@ -31,5 +31,13 @@ export const blogPages: Page []= [
     filename: "assets/md/lombok.md",
     image: "assets/img/lombok.webp",
     imageStyle: "scale"
-  }
+  },
+  {
+    id: "java21-virtual-thread",
+    title: "Java 21 and Virtual Threads",
+    subtitle: "Why you should not miss this feature",
+    filename: "assets/md/java21-virtual-thread.md",
+    image: "assets/img/thread.jpeg",
+    imageStyle: "cover"
+  },
 ]
