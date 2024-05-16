@@ -105,7 +105,7 @@ the Java runtime suspends the virtual thread until it can be resumed. The OS thr
 
 # Credits
 
-I badly explained what is the biggest point to me, if you want here below I have added ©some better and 
+I badly explained what is the biggest point to me, if you want here below I have added better and 
 complete information about Virtual Threads:
 
 - [JEP 444](https://openjdk.org/jeps/444)
