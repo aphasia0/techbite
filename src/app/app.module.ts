@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import {NgOptimizedImage, registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,24 +28,25 @@ registerLocaleData(en);
   declarations: [
     AppComponent
   ],
-  imports: [
-    RouterModule.forRoot([]),
-    MarkdownModule.forRoot(),
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    NzLayoutModule,
-    NzMenuModule,
-    RouterLink,
-    NzIconModule,
-    NzSwitchModule,
-    NzInputModule,
-    NzAutocompleteModule,
-    RouterOutlet,
-    NzButtonModule,
-    PagesModule
-  ],
+    imports: [
+        RouterModule.forRoot([]),
+        MarkdownModule.forRoot(),
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        NzLayoutModule,
+        NzMenuModule,
+        RouterLink,
+        NzIconModule,
+        NzSwitchModule,
+        NzInputModule,
+        NzAutocompleteModule,
+        RouterOutlet,
+        NzButtonModule,
+        PagesModule,
+        NgOptimizedImage
+    ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
   ],
