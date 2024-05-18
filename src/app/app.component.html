@@ -56,10 +56,11 @@
     <nz-header [ngClass]="!isCollapsed && shouldBeClosed() ? 'right-layout' : 'right-layout-0'">
       <div class="p-2 app-header flex flex-row bg-white dark:bg-primary dark:text-white">
         <div class="p-0.5 flex-none w-14">
-          <i (click)="isCollapsed = !isCollapsed" class="cursor-pointer" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+          <i (click)="isCollapsed = !isCollapsed" class="cursor-pointer" nz-icon
+             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </div>
         <div>
-          <nz-switch class="pt-1 flex-none w-28" [ngModel]="false" (ngModelChange)="call($event)" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"></nz-switch>
+          <app-dark-mode-switch></app-dark-mode-switch>
         </div>
         <div class="flex-none md:flex-1"></div>
         <div class="flex-1">
