@@ -6,15 +6,12 @@
     nzBreakpoint="md"
     [(nzCollapsed)]="isCollapsed"
     [nzTrigger]="null"
-    [nzCollapsedWidth]="0"
-  >
+    [nzCollapsedWidth]="0">
+
     <div class="h-full flex flex-col">
 
       <a class="sidebar-logo p-5 icon-container" href="/home">
-        <img
-          ngSrc="assets/img/default-monochrome.svg"
-          alt="logo"
-          height="16" width="16"/>
+        <img ngSrc="assets/img/default-monochrome.svg" alt="logo" height="16" width="16"/>
       </a>
 
       <ul
@@ -57,21 +54,16 @@
   </nz-sider>
   <nz-layout [ngClass]="!isCollapsed && !shouldBeClosed()  ? 'right-layout' : 'right-layout-0'">
     <nz-header [ngClass]="!isCollapsed && shouldBeClosed() ? 'right-layout' : 'right-layout-0'">
-      <div class=" app-header grid grid-cols-2 md:grid-cols-6 items-center bg-white dark:bg-primary dark:text-white">
-        <div class="text-2xl p-3 col-span-2 md:col-span-3 "><i
-          (click)="isCollapsed = !isCollapsed"
-          class="trigger"
-          nz-icon
-          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-        ></i>
-          <span class="mx-5 float-right md:mx-10 md:float-none">
-            <nz-switch [ngModel]="false" (ngModelChange)="call($event)" nzCheckedChildren="Dark"
-                       nzUnCheckedChildren="Light"></nz-switch>
-          </span>
+      <div class="p-2 app-header flex flex-row bg-white dark:bg-primary dark:text-white">
+        <div class="p-0.5 flex-none w-14">
+          <i (click)="isCollapsed = !isCollapsed" class="cursor-pointer" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </div>
-        <div class="col-span-4 p-3 md:col-span-3">
+        <div>
+          <nz-switch class="pt-1 flex-none w-28" [ngModel]="false" (ngModelChange)="call($event)" nzCheckedChildren="Dark" nzUnCheckedChildren="Light"></nz-switch>
+        </div>
+        <div class="flex-none md:flex-1"></div>
+        <div class="flex-1">
           <form #f="ngForm" nz-form (ngSubmit)="search(f)">
-
             <nz-input-group
               nzSearch
               nzSize="large"
