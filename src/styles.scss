@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'assets/themes/mytheme/theme.scss';
 @tailwind base;
 
 @tailwind components;
@@ -20,3 +21,4 @@ ul{
   @apply list-disc pt-3 pl-3
 }
 @tailwind utilities;
+

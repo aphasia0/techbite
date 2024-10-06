@@ -1,0 +1,80 @@
+<div>
+  <!-- Stepper -->
+  <p-steps
+    [model]="steps"
+    [activeIndex]="activeStep"
+    [readonly]="true"
+    class="stretch-stepper"
+  ></p-steps>
+
+  <div class="step-content dark:bg-gray-900 bg-gray-100">
+    <!-- Step 1: File Upload -->
+    <div *ngIf="activeStep === 0">
+      <form
+        (ngSubmit)="onSubmit()"
+        enctype="multipart/form-data"
+        class="file-upload-form"
+      >
+        <label for="file" class="file-label">Select file:</label>
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          class="file-input"
+        />
+        <button
+          type="submit"
+          pButton
+          label="Upload"
+          [disabled]="!selectedFile"
+          class="my-button"
+        ></button>
+      </form>
+
+      <div class="progress-container" *ngIf="uploadProgress >= 0">
+        <p-progressBar [value]="uploadProgress"></p-progressBar>
+        <p class="full-row">Upload Progress: {{ uploadProgress }}%</p>
+      </div>
+    </div>
+
+    <!-- Step 2: Password Submission -->
+    <div *ngIf="activeStep === 1">
+      <form
+        (ngSubmit)="onSubmitPassword()"
+        enctype="multipart/form-data"
+        class="file-upload-form "
+      >
+        <label for="pwd" class="password-label">Password:</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          class="password-input"
+        />
+        <button
+          type="submit"
+          pButton
+          label="Remove Password"
+          class="my-button"
+        ></button>
+      </form>
+    </div>
+
+    <!-- Step 3: Restart -->
+    <div *ngIf="activeStep === 2">
+      <div class="grid">
+      <button
+        pButton
+        label="Restart"
+        (click)="reset()"
+        class="my-button"
+      ></button>
+    </div>
+    </div>
+
+    <!-- Error and Message Display -->
+    <div class="message">
+      <div class="error-message">{{ errorMessage }}</div>
+      <div class="success-message">{{ message }}</div>
+    </div>
+  </div>
+</div>

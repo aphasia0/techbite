@@ -20,6 +20,8 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import { MarkdownModule } from 'ngx-markdown';
 import {PagesModule} from "./pages/pages.module";
 import { BlogPageComponent } from './pages/blog-page/blog-page.component';
+import { UploadComponent } from './pages/upload/upload.component';
+import { HomeOutline } from '@ant-design/icons-angular/icons';
 
 
 registerLocaleData(en);
@@ -31,6 +33,7 @@ registerLocaleData(en);
     imports: [
         RouterModule.forRoot([]),
         MarkdownModule.forRoot(),
+
         BrowserModule,
         FormsModule,
         HttpClientModule,
@@ -45,7 +48,9 @@ registerLocaleData(en);
         RouterOutlet,
         NzButtonModule,
         PagesModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        UploadComponent,
+        
     ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

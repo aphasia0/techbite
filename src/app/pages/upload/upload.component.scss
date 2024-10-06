@@ -1,0 +1,65 @@
+.step-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.grid {
+  display: grid;
+}
+
+.file-upload-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+}
+
+.file-label,
+.password-label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.file-input,
+.password-input {
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.progress-container {
+  display: grid;
+  justify-content: center;
+}
+
+.error-message {
+  color: red;
+}
+
+.file-upload-form {
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 20px;
+  display: grid;
+  padding: 10px;
+}
+
+
+.progress-container {
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  display: grid;
+}
+.full-row {
+  grid-column: span 2; /* Span across all columns */
+  justify-self: center; /* Center the item horizontally */
+  width: fit-content; /* Adjust width to content for centering */
+}
+
+.my-button {
+  @apply full-row bg-primary hover:bg-primary-500 text-white font-bold py-2 px-4 rounded-full;
+}
