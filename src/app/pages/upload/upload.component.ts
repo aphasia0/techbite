@@ -29,7 +29,7 @@ export class UploadComponent {
   selectedFile: File | null = null;
   uploadProgress: number = -1; // Initialize with -1 to hide the progress bar
   uploadedFilename: String = ''; // To store the uploaded filename
-  activeStep: number = 1; // To track the current step
+  activeStep: number = 0; // To track the current step
   password: String = '';
   errorMessage: String | null = null;
   message: String | null = null;
