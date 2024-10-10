@@ -1,7 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'assets/themes/mytheme/theme.scss';
 @tailwind base;
-
 @tailwind components;
 h1{
   @apply text-3xl dark:text-white font-extrabold mt-2 mb-2
