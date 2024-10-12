@@ -14,8 +14,18 @@ p{
 }
 
 ul{
-
   @apply list-disc pt-3 pl-3
 }
 @tailwind utilities;
+
+:root{
+  --p-primary-600: #053017;
+  --p-primary-500: #085429;
+   
+}
+
+*, ::before {
+  border-width: medium;
+  border-style: revert-layer; 
+}
 
