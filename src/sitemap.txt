@@ -1,6 +1,6 @@
-https://antoniogiordano.dev/home
+https://antoniogiordano.dev/blog/java21-virtual-thread
+https://antoniogiordano.dev/pdf-remove-password
 https://antoniogiordano.dev/blog/why-i-love-tailwind-css
 https://antoniogiordano.dev/blog/dart-tour-part-1
 https://antoniogiordano.dev/blog/lombok-yes-i-like-it
-https://antoniogiordano.dev/blog/java21-virtual-thread
-https://antoniogiordano.dev/pdf-remove-password
+https://antoniogiordano.dev/home
