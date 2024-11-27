@@ -7,8 +7,8 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 })
 export class UploadService {
 
-  private apiUrl = 'https://api.antoniogiordano.dev:5555/upload'; // URL del controller Spring Boot
-  private apiUrlRemovePassword = 'https://api.antoniogiordano.dev:5555/remove-password'; // URL del controller Spring Boot
+  private apiUrl = 'https://api.antoniogiordano.dev:3333/upload'; // URL del controller Spring Boot
+  private apiUrlRemovePassword = 'https://api.antoniogiordano.dev:3333/remove-password'; // URL del controller Spring Boot
 
   constructor(private http: HttpClient) { }
 
