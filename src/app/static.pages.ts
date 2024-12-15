@@ -40,4 +40,12 @@ export const blogPages: Page []= [
     image: "assets/img/thread.jpeg",
     imageStyle: "cover"
   },
+  {
+    id: "ollama-local-llm",
+    title: "Run Local LLM with Ollama",
+    subtitle: "You need a big GPU to run this",
+    filename: "assets/md/ollama-local-llm",
+    image: "assets/img/ollama-local-llm.webp",
+    imageStyle: "cover"
+  }
 ]
