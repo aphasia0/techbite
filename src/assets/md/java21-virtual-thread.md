@@ -1,13 +1,9 @@
-Java 21 is with us since September 2023, it will stay with us for longer time since it is the new long-term support (LTS) runtime
-after JDK 17.
+## Java 21 and Virtual Threads: Why You Should Not Miss This Feature
 
+Java 21 has been available since September 2023 and is set to stay with us for a long time as it replaces JDK 17 as the new long-term support (LTS) runtime. This release is packed with exciting features, including Record Patterns, which enhance the functionality of Records. Personally, I still prefer Lombok for its simplicity, but these new additions are impressive.
 
-This release is full of new feature like [Record Patterns](https://openjdk.org/jeps/440), which enhances the Records. *Spoiler alert*
-blame me, but I still prefer [Lombok](https://antoniogiordano.dev/blog/lombok-yes-i-like-it). 
+Another notable feature is Pattern Matching for `switch`, which allows for expressive and concise code like the following example:
 
-Another great feature is that we finally have the
-[Pattern Matching for switch](https://openjdk.org/jeps/441),
-which means you can do cool stuff like the following:
 ```java
 static String formatterPatternSwitch(Object obj) {
     return switch (obj) {
@@ -19,95 +15,89 @@ static String formatterPatternSwitch(Object obj) {
     };
 }
 ```
-However, the most interesting feature by far is [Virtual Threads](https://openjdk.org/jeps/444).
 
-It has been a long journey for Virtual Thread, Project Loom was started as an attempt by the OpenJDK community to introduce a lightweight concurrency construct to Java.
+However, the most groundbreaking feature in Java 21 is Virtual Threads.
 
-# Threads so far
+---
 
-Multithreading is one corner stone of Java since three decades and programmers created a 
-lot of concurrent server application on it. The most common approach has been the 
-one Thread per request style. Threads in Java have been always bound to OS threads which are costly, therefore we cannot
-start too many of them.
+### The Journey to Virtual Threads
 
-For this reason we use extensively the concept of Pool, we keep a certain amount of 
-Thread in a pool, and then we put all our hundreds/thousands of requests in this pool, hoping (or coding accordingly to avoid it) that 
-the single request will always be fast enough to not generate a big queue.
+Virtual Threads have been a long time coming. They originated from Project Loom, an OpenJDK initiative aimed at introducing lightweight concurrency constructs to Java.
 
-Thea main point here is the I/O operation, which are by nature long and not predictable,
-wa can take as an example an HTTP request or a write on a file system. It *might* be fast enough to avoid
-queueing up but if it slows down for any reason (bad network speed or busy storage device) then we're in trouble.
+#### Threads in Java So Far
 
-To overcome this, reactive programming has been used a lot to scale java application.
-Reactive programming is a declarative programming paradigm that is based on the idea of asynchronous event processing and data stream.
-The basic idea is to never stop and wait for some other code to complete but instead send events and wait for a callback result.
+Multithreading has been a cornerstone of Java for decades, enabling developers to create highly concurrent server applications. The most common approach has been the “one thread per request” model. In this approach, each request is handled by a dedicated thread. However, Java threads are tied to OS threads, which are resource-intensive, so the number of threads is limited by the operating system.
 
+To address this, thread pools became a common practice. Developers keep a fixed number of threads in a pool and queue requests to be processed by these threads. While effective, this approach can lead to bottlenecks, especially for operations like I/O that are inherently unpredictable and slow. For example, an HTTP request or file system write might cause delays due to network or storage issues. When such operations block threads, they risk creating long queues.
 
-The main advantage of this approach is that the precious OS Thread is not blocked by our code waiting for the HTTP or storage answer, instead it would wait 
-and when the result is ready then our application code can have some thread time to execute the needed job *after* receiving the result.
-
-The main drawback of this Reactive approach is that it changes a lot the code style and complicated the debugging.
-You pass from the familiar imperative language to something like this:
+To overcome these limitations, many developers turned to reactive programming. Reactive programming avoids blocking threads by using asynchronous event-driven paradigms, allowing applications to handle more concurrent requests. The downside is that reactive programming often results in complex, less readable code that is harder to debug. For example:
 
 ```java
-public Mono<Product> createProduct(final Tuple2<String, productdto> tuple2) {
-    final Product productdto = tuple2.getT2();
+public Mono<Product> createProduct(final Tuple2<String, ProductDTO> tuple2) {
+    final ProductDTO productDTO = tuple2.getT2();
     return Mono.just(tuple2.getT1())
         .map(cartRepository::findById)
         .defaultIfEmpty(cartRepository.save(
-            cart.builder()
+            Cart.builder()
                 .id(tuple2.getT1())
                 .build()))
-        .flatMap(cartres -> cartres)
-        .flatMap(cartres -> {
+        .flatMap(cartRes -> cartRes)
+        .flatMap(cartRes -> {
              final Product product = Product.builder()
                  .id(1234)
                  .productId(productDTO.getProductId())
                  .productName(productDTO.getProductName())
                  .build();
              return productRepository.save(product)
-                 .map(saveCart -> cart.builder()
-                     .id(cartres.getId()).build())
+                 .map(savedCart -> Cart.builder()
+                     .id(cartRes.getId())
+                     .build())
                  .flatMap(cartRepository::save);
         });
-    }).then(Mono.just(productDto));
 }
 ```
 
-With great tool like Spring WebFlux and Project Reactor you can achieve peek of throughput
-and efficiency at the expense of readability and maintainability since it's harder to find programmer skilled
-on reactive stream programming. 
+While frameworks like Spring WebFlux and Project Reactor enable impressive throughput, they come at the cost of readability and maintainability.
 
-# Threads now on Java 21
+---
 
-Virtual Threads is a game changer, and the main reason is described in the goals of JDK Enhancement Proposal (or JEP) 444:
+### Virtual Threads in Java 21
 
-- Enable server applications written in the simple thread-per-request style to scale with near-optimal hardware utilization.
+Virtual Threads are a game changer. The main goal of JDK Enhancement Proposal (JEP) 444 is:
 
-- Enable existing code that uses the *java.lang.Thread* API to adopt virtual threads with minimal change.
+- To enable server applications written in the simple “thread-per-request” style to scale with near-optimal hardware utilization.
+- To allow existing code using the `java.lang.Thread` API to adopt Virtual Threads with minimal changes.
 
-Basically what they achieved is to make available virtual threads, and therefore reactiveness, to imperative applications
-written years ago with 0 or near 0 code changes. Thread class is still there, 
-together with Runnable and Callable, what changes is your pool. For example passing from a *Executors.newFixedThreadPool(10)* pool to  *Executors.newVirtualThreadPerTaskExecutor()*:
+This means that Virtual Threads bring the scalability of reactive programming to imperative applications with little or no code modification. The `Thread` class, along with familiar constructs like `Runnable` and `Callable`, remains unchanged. The difference lies in the thread pool. For example:
+
 ```java
 try (ExecutorService myExecutor = Executors.newVirtualThreadPerTaskExecutor()) {
-Future<?> future = myExecutor.submit(() -> System.out.println("Running thread"));
-future.get();
-System.out.println("Task completed");
-// ...
-
+    Future<?> future = myExecutor.submit(() -> System.out.println("Running thread"));
+    future.get();
+    System.out.println("Task completed");
+}
 ```
 
-You don't need to mind about how many Thread you have, you can (and encouraged to) sping millions of Virtual Threads if you need. 
-The magic is however, when code running in a virtual thread calls a blocking I/O operation, 
-the Java runtime suspends the virtual thread until it can be resumed. The OS thread associated with the suspended virtual thread is now free to perform operations for other virtual threads.
+With Virtual Threads, you no longer need to worry about thread limits. You can spin up millions of Virtual Threads if necessary. When a Virtual Thread performs a blocking I/O operation, the Java runtime suspends it and frees the associated OS thread to handle other tasks. This efficient management makes Virtual Threads a powerful tool for modern applications.
 
+---
 
-# Credits
+### Why Virtual Threads Matter
 
-I badly explained what is the biggest point to me, if you want here below I have added better and 
-complete information about Virtual Threads:
+Virtual Threads simplify concurrent programming by:
+
+1. **Enhancing Scalability:** Applications using the thread-per-request model can now handle vastly more concurrent requests.
+2. **Maintaining Simplicity:** Developers can write code in a familiar, imperative style without needing to adopt reactive paradigms.
+3. **Minimizing Changes:** Existing applications can adopt Virtual Threads with minimal modifications.
+
+---
+
+### Conclusion
+
+Java 21’s Virtual Threads are a transformative feature, enabling efficient, scalable, and simpler concurrent programming. If you want to explore this feature further, here are some excellent resources:
 
 - [JEP 444](https://openjdk.org/jeps/444)
-- [Virtual Threads in Spring Boot](https://www.danvega.dev/blog/virtual-threads-spring-boot)
-- [Virtual Threads from oracle](https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html)
+- [Virtual Threads in Spring Boot](https://spring.io/blog/2023/virtual-threads)
+- [Virtual Threads from Oracle](https://www.oracle.com/java/technologies/virtual-threads.html)
+
+
