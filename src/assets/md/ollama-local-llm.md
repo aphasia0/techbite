@@ -120,5 +120,5 @@ If you’re working with older hardware:
 
 Ollama simplifies the process of running open-source AI models locally, making it accessible to developers of all levels. While modern hardware provides the best experience, older machines can still be used with appropriate optimizations and smaller models. With Ollama, you have the power to explore AI capabilities without relying on external services.
 
-For further details, visit the [Ollama documentation](https://ollama.ai/docs).
+For further details, visit the [Ollama documentation](https://github.com/ollama/ollama).
 
