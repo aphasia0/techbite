@@ -47,5 +47,14 @@ export const blogPages: Page []= [
     filename: "assets/md/ollama-local-llm.md",
     image: "assets/img/ollama-local-llm.webp",
     imageStyle: "cover"
+  },
+
+  {
+    id: "nano-banana-5-prompt",
+    title: "How powerful is nano banana?",
+    subtitle: "A lot, you need just the right recipe",
+    filename: "assets/md/nano-banana-5-prompt",
+    image: "assets/img/nano-banana-5-prompt.jpg",
+    imageStyle: "cover"
   }
 ]
