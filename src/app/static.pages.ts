@@ -7,7 +7,7 @@ export interface Page {
   imageStyle: string;
 }
 
-export const blogPages: Page []= [
+export const blogPages: Page[] = [
   {
     id: "why-i-love-tailwind-css",
     title: "Why I love tailwind css",
@@ -53,7 +53,7 @@ export const blogPages: Page []= [
     id: "nano-banana-5-prompt",
     title: "How powerful is nano banana?",
     subtitle: "A lot, you need just the right recipe",
-    filename: "assets/md/nano-banana-5-prompt",
+    filename: "assets/md/nano-banana-5-prompt.md",
     image: "assets/img/nano-banana-5-prompt.jpg",
     imageStyle: "cover"
   }
