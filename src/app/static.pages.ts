@@ -56,5 +56,13 @@ export const blogPages: Page[] = [
     filename: "assets/md/nano-banana-5-prompt.md",
     image: "assets/img/nano-banana-5-prompt.jpg",
     imageStyle: "cover"
+  },
+  {
+    id: "n8n-integration-trick",
+    title: "Supercharge Workflows with n8n",
+    subtitle: "Master the Merge Node",
+    filename: "assets/md/n8n-integration-trick.md",
+    image: "assets/img/n8n-hero.webp",
+    imageStyle: "cover"
   }
 ]
