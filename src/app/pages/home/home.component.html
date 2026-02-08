@@ -1,26 +1,52 @@
 <div class="flex flex-col">
-  <app-page-header
-    title="Random tech stories"
-    subtitle="From a full stack (overflow) developer"
-    imageStyle="cover"
+  <app-page-header title="Random tech stories" subtitle="From a full stack (overflow) developer" imageStyle="cover"
     image="assets/img/coding.jpeg"></app-page-header>
 
   <div class="py-2">
     <p>
       Hi there. I'm <span class="font-bold">Antonio Giordano</span>, a software developer from Italy
-      <img class="inline h-7" src="https://img.icons8.com/color/48/000000/italy.png"/>
+      <img class="inline h-7" src="https://img.icons8.com/color/48/000000/italy.png" />
     </p>
     <p class="py-2">
       Sharing here my personal taught about technologies.
       I use on daily basis Angular, Java and Spring, interested in web 3.0 and Solidity language.
-      Having fun right now with flutter, follow my <a class="underline font-extrabold" href="https://twitter.com/search?q=%23100DaysOfCode&src=hashtag_click">#100DaysOfCode</a> challenge on X.
+      Having fun right now with flutter, follow my <a class="underline font-extrabold"
+        href="https://twitter.com/search?q=%23100DaysOfCode&src=hashtag_click">#100DaysOfCode</a> challenge on X.
     </p>
     <p class="py-2">
-    This site is open source, made with <a class="underline font-extrabold" href="https://angular.io/">Angular</a>, <a class="underline font-extrabold" href="https://ng.ant.design/docs/introduce/en">ng-zorro</a>
-    and <a class="underline font-extrabold" href="https://primeng.org/">primeNG</a>
+      This site is open source, made with <a class="underline font-extrabold" href="https://angular.io/">Angular</a>, <a
+        class="underline font-extrabold" href="https://ng.ant.design/docs/introduce/en">ng-zorro</a>
+      and <a class="underline font-extrabold" href="https://primeng.org/">primeNG</a>
     </p>
     <p class="py-2">
-      Here you can find the repository: <a class="underline font-extrabold" href="https://github.com/aphasia0/techbite">https://github.com/aphasia0/techbite</a>
+      Here you can find the repository: <a class="underline font-extrabold"
+        href="https://github.com/aphasia0/techbite">https://github.com/aphasia0/techbite</a>
     </p>
+  </div>
+
+  <!-- Latest Posts Section -->
+  <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+    <h2 class="text-3xl font-bold mb-6 dark:text-white">Latest Posts</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <a *ngFor="let post of latestPosts" [routerLink]="'/blog/' + post.id"
+        class="latest-post-card flex flex-col p-5 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white dark:bg-gray-800">
+
+        <!-- Date Chip -->
+        <div class="flex items-start gap-3 mb-3">
+          <div
+            class="date-chip-home flex flex-col items-center justify-center rounded p-2 min-w-[50px] text-white leading-none flex-shrink-0"
+            style="background-color: #39C643;">
+            <span class="text-xs font-bold uppercase">{{post.date | date:'MMM'}}</span>
+            <span class="text-lg font-black">{{post.date | date:'d'}}</span>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold dark:text-white mb-1">{{post.title}}</h3>
+          </div>
+        </div>
+
+        <!-- Subtitle -->
+        <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">{{post.subtitle}}</p>
+      </a>
+    </div>
   </div>
 </div>

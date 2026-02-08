@@ -111,8 +111,8 @@ nz-content {
   background-color: #39C643 !important;
 }
 
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.sidebar-title {
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.3;
 }
