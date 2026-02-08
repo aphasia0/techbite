@@ -1,9 +1,14 @@
 <div class="grid justify-items-start text-4xl font-bold">
   {{title}}
 </div>
+<div class="grid justify-items-start dark:text-white font-medium text-lg text-gray-400 mt-2 italic" *ngIf="date"
+  style="font-family: 'Georgia', serif;">
+  Published on {{formattedDate}}
+</div>
 <div class="grid justify-items-start dark:text-white font-large text-2xl text-gray-500 mt-6 mb-6">
   {{subtitle}}
 </div>
 <div class="py-4">
-  <img [src]="image" [ngClass]="imageStyle === 'cover' ? 'object-cover':'object-scale-down'" class="object-cover rounded-xl h-64 w-full">
+  <img [src]="image" [ngClass]="imageStyle === 'cover' ? 'object-cover':'object-scale-down'"
+    class="object-cover rounded-xl h-64 w-full">
 </div>

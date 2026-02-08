@@ -1,10 +1,11 @@
-
 body {
   font-family: 'Roboto', sans-serif;
 }
+
 .app-layout {
   min-height: 100vh;
 }
+
 nz-sider {
   overflow: auto;
   height: 100%;
@@ -16,7 +17,7 @@ nz-sider {
 
 .trigger:hover {
   color: #1890ff;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .icon-container {
@@ -25,7 +26,8 @@ nz-sider {
   align-items: center;
 
 }
-.icon-menu{
+
+.icon-menu {
   font-size: 33px;
   color: white;
 }
@@ -48,7 +50,7 @@ nz-header {
 }
 
 .app-header {
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 }
 
 nz-content {
@@ -62,10 +64,11 @@ nz-content {
   overflow: auto;
 }
 
-.search-input{
+.search-input {
   padding: 10px 24px;
 }
-.ant-layout-header{
+
+.ant-layout-header {
   height: initial;
   line-height: inherit;
 }
@@ -75,12 +78,13 @@ nz-content {
   transition: all .2s;
 
 }
+
 .right-layout-0 {
   margin-left: 0px;
   transition: all .2s;
 }
 
-.ant-layout-sider-children{
+.ant-layout-sider-children {
   height: 90%;
   border: 4px solid black;
 }
@@ -88,6 +92,27 @@ nz-content {
 :host ::ng-deep .ant-switch {
   background-color: gray;
 }
+
 :host ::ng-deep .ant-switch-checked {
   background-color: #085429;
+}
+
+.date-sidebar {
+  transition: transform 0.2s;
+  box-shadow: 0 2px 4px rgba(186, 9, 9, 0.1);
+  flex-shrink: 0;
+}
+
+[nz-menu-item]:hover .date-sidebar {
+  transform: scale(1.05);
+}
+
+[nz-menu-item].ant-menu-item-selected .date-sidebar {
+  background-color: #39C643 !important;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

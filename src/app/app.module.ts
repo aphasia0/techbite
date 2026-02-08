@@ -17,6 +17,7 @@ import {NzSwitchModule} from "ng-zorro-antd/switch";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzAutocompleteModule} from "ng-zorro-antd/auto-complete";
 import {NzButtonModule} from "ng-zorro-antd/button";
+import {NzToolTipModule} from "ng-zorro-antd/tooltip";
 import { MarkdownModule } from 'ngx-markdown';
 import {PagesModule} from "./pages/pages.module";
 import { BlogPageComponent } from './pages/blog-page/blog-page.component';
@@ -50,6 +51,7 @@ registerLocaleData(en);
         PagesModule,
         NgOptimizedImage,
         UploadComponent,
+        NzToolTipModule,
         
     ],
   providers: [

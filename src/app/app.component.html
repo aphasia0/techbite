@@ -1,34 +1,45 @@
 <nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-    [nzCollapsedWidth]="0">
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null" [nzCollapsedWidth]="0">
 
     <div class="h-full flex flex-col">
 
       <a class="sidebar-logo p-5 icon-container" href="/home">
-        <img ngSrc="assets/img/default-monochrome.svg" alt="logo" height="16" width="16"/>
+        <img ngSrc="assets/img/default-monochrome.svg" alt="logo" height="16" width="16" />
       </a>
 
-      <ul
-        nz-menu
-        nzOpen
-        nzTheme="dark"
-        nzMode="inline"
-        [nzInlineCollapsed]="isCollapsed"
-      >
+      <ul nz-menu nzOpen nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
         <li (click)="test()" nzMatchRouter routerLink="/home" nz-menu-item>
           <i nz-icon nzType="home"></i>
           <span>Home</span>
         </li>
-        <li nz-submenu nzOpen nzTitle="Pages" nzIcon="highlight">
+        <li nz-submenu nzOpen nzTitle="Latest Posts" nzIcon="highlight">
           <ul>
-            <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of links">
-              <a style="flex: auto" class="truncate" [routerLink]="'blog/'+page.id">{{ page.title }}</a>
+            <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of topLinks">
+              <a [routerLink]="'blog/'+page.id" class="flex items-center gap-3 w-full">
+                <div
+                  class="date-sidebar flex flex-col items-center justify-center rounded p-1 min-w-[40px] bg-primary-600 text-white leading-none">
+                  <span class="text-[9px] font-bold uppercase">{{page.date | date:'MMM'}}</span>
+                  <span class="text-sm font-black">{{page.date | date:'d'}}</span>
+                </div>
+                <span class="truncate" nz-tooltip [nzTooltipTitle]="page.title" [nzTooltipPlacement]="'right'">{{
+                  page.title }}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li nz-submenu [nzOpen]="false" nzTitle="Older Posts" nzIcon="history" *ngIf="olderLinks.length > 0">
+          <ul>
+            <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of olderLinks">
+              <a [routerLink]="'blog/'+page.id" class="flex items-center gap-3 w-full">
+                <div
+                  class="date-sidebar flex flex-col items-center justify-center rounded p-1 min-w-[40px] bg-primary-600 text-white leading-none">
+                  <span class="text-[9px] font-bold uppercase">{{page.date | date:'MMM'}}</span>
+                  <span class="text-sm font-black">{{page.date | date:'d'}}</span>
+                </div>
+                <span class="truncate" nz-tooltip [nzTooltipTitle]="page.title" [nzTooltipPlacement]="'right'">{{
+                  page.title }}</span>
+              </a>
             </li>
           </ul>
         </li>
@@ -60,7 +71,7 @@
       <div class="p-2 app-header flex flex-row bg-white dark:bg-primary dark:text-white">
         <div class="p-0.5 flex-none w-14">
           <i (click)="isCollapsed = !isCollapsed" class="cursor-pointer" nz-icon
-             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
         </div>
         <div>
           <app-dark-mode-switch></app-dark-mode-switch>
@@ -68,31 +79,16 @@
         <div class="flex-none md:flex-1"></div>
         <div class="flex-1">
           <form #f="ngForm" nz-form (ngSubmit)="search(f)">
-            <nz-input-group
-              nzSearch
-              nzSize="large"
-              [nzAddOnAfter]="suffixIconButton"
-            >
-              <input (focus)="select()"
-                     class="search-box"
-                     name="search"
-                     placeholder="Search"
-                     nz-input
-                     [(ngModel)]="model"
-                     (input)="onInput($event)"
-                     [nzAutocomplete]="auto"
-              />
+            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixIconButton">
+              <input (focus)="select()" class="search-box" name="search" placeholder="Search" nz-input
+                [(ngModel)]="model" (input)="onInput($event)" [nzAutocomplete]="auto" />
             </nz-input-group>
             <ng-template #suffixIconButton>
               <button nz-button nzType="primary" nzSize="large" nzSearch>
                 <i nz-icon nzType="search" nzTheme="outline"></i>
               </button>
             </ng-template>
-            <nz-autocomplete
-              [nzDataSource]="options"
-              nzBackfill
-              #auto
-            ></nz-autocomplete>
+            <nz-autocomplete [nzDataSource]="options" nzBackfill #auto></nz-autocomplete>
 
           </form>
         </div>

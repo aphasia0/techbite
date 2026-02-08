@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
-import {blogPages, Page} from "../../static.pages";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
+import { blogPages, Page } from "../../static.pages";
 
 
 @Component({
@@ -31,7 +31,8 @@ export class BlogPageComponent implements OnInit, OnDestroy {
           image: "assets/img/sorry.jpg",
           subtitle: "",
           filename: "",
-          imageStyle: "cover"
+          imageStyle: "cover",
+          date: ""
         }
       }
     });

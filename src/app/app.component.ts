@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {blogPages, Page} from "./static.pages";
-import {Router} from "@angular/router";
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { blogPages, Page } from "./static.pages";
+import { Router } from "@angular/router";
 import { PrimeNGConfig } from 'primeng/api';
 import { definePreset } from 'primeng/themes';
 import { Nora } from 'primeng/themes/nora';
@@ -17,18 +17,29 @@ export class AppComponent {
   isCollapsed = false;
   isDark: any;
   links: Page[] = blogPages;
-  model:any;
-  
+  topLinks: Page[] = [];
+  olderLinks: Page[] = [];
+  model: any;
 
-  constructor(private router: Router,private config: PrimeNGConfig) {
-    this.config.theme.set({ preset: Nora ,
-            options: {
-                darkModeSelector: '.dark',
-                cssLayer: {
-                  name: 'primeng',
-                  order: 'tailwind-base, primeng, tailwind-utilities'
-              }
-            }});
+
+  constructor(private router: Router, private config: PrimeNGConfig) {
+    this.initLinks();
+    this.config.theme.set({
+      preset: Nora,
+      options: {
+        darkModeSelector: '.dark',
+        cssLayer: {
+          name: 'primeng',
+          order: 'tailwind-base, primeng, tailwind-utilities'
+        }
+      }
+    });
+  }
+
+  private initLinks() {
+    this.links = [...blogPages].sort((a, b) => b.date.localeCompare(a.date));
+    this.topLinks = this.links.slice(0, 3);
+    this.olderLinks = this.links.slice(3);
   }
 
   onInput(event: Event): void {
@@ -40,11 +51,11 @@ export class AppComponent {
   }
 
   search(f: NgForm) {
-    const route = this.links?.filter(x => x.title === f.value.search).map(x => 'blog/'+x.id)
+    const route = this.links?.filter(x => x.title === f.value.search).map(x => 'blog/' + x.id)
     console.log(route)
     if (route) {
       this.router.navigate(route).then(
-         () => this.model = ''
+        () => this.model = ''
       );
     }
 
