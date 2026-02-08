@@ -59,7 +59,7 @@ export const blogPages: Page[] = [
     title: "How powerful is nano banana?",
     subtitle: "A lot, you need just the right recipe",
     filename: "assets/md/nano-banana-5-prompt.md",
-    image: "assets/img/nano-banana-5-prompt.jpg",
+    image: "assets/img/nano-banana-1.png",
     imageStyle: "cover",
     date: "2025-01-05"
   },

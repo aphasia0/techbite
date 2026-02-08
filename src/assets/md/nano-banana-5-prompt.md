@@ -26,31 +26,68 @@ Here are five compelling prompts designed to create versatile, high-quality visu
 This prompt creates a clean, detailed environment perfect for overlaying statistics about infrastructure, technology, or smart city growth.
 
 > **Prompt:**
-> "A highly detailed isometric 3D render of a futuristic smart city on a white background. The city features floating glass data blocks, glowing fiber optic lines connecting buildings, and green roof gardens. Soft, studio lighting with a pastel color palette of cyan, white, and soft coral. Minimalist style, high resolution, 8k, unreal engine 5 render style."
+```text
+A highly detailed isometric 3D render of a futuristic smart city on a white
+background. The city features floating glass data blocks, glowing fiber optic
+lines connecting buildings, and green roof gardens. Soft, studio lighting with
+a pastel color palette of cyan, white, and soft coral. Minimalist style, high
+resolution, 8k, unreal engine 5 render style.
+```
+
+![Isometric Smart City](assets/img/nano-banana-1.png)
 
 #### 2. The Abstract Network Sphere (For Connectivity/AI)
 Use this for visualizing global networks, social media reach, or neural networks.
 
 > **Prompt:**
-> "A macro photography shot of a glowing translucent sphere composed of thousands of interconnecting golden nodes and silver threads. Deep blue gradient background. Shallow depth of field focusing on the center connections. Cinematic lighting, intricate detail, representing complex data networks."
+```text
+A macro photography shot of a glowing translucent sphere composed of
+thousands of interconnecting golden nodes and silver threads. Deep blue
+gradient background. Shallow depth of field focusing on the center connections.
+Cinematic lighting, intricate detail, representing complex data networks.
+```
+
+![Abstract Network Sphere](assets/img/nano-banana-2.png)
 
 #### 3. The Paper Cutout Topography (For Demographics/Geography)
 A tactile, organic style that works beautifully for environmental reports or demographic layering.
 
 > **Prompt:**
-> "Layered paper art style illustration of a topographic map. distinct layers of paper in varying shades of teal and emerald green, casting soft realistic shadows to create depth. clean lines, minimalist design, overhead view. The layers form a smooth, organic flow representing statistical growth."
+```text
+Layered paper art style illustration of a topographic map. distinct layers of
+paper in varying shades of teal and emerald green, casting soft realistic
+shadows to create depth. clean lines, minimalist design, overhead view.
+The layers form a smooth, organic flow representing statistical growth.
+```
+
+![Paper Cutout Topography](assets/img/nano-banana-3.png)
 
 #### 4. The Glass Bauhaus Infographic (For Financial/Corporate)
 This creates a sophisticated, structured background that implies stability and transparency.
 
 > **Prompt:**
-> "Bauhaus inspired 3D geometric composition. Frosted glass cubes, brushed metal spheres, and thin matte black connecting rods arranged in an organized, balanced structure. Soft diffused lighting from the left. Neutral color palette of beige, grey, and soft orange. Ultra-clean 3D render suitable for a financial report background."
+```text
+Bauhaus inspired 3D geometric composition. Frosted glass cubes, brushed metal
+spheres, and thin matte black connecting rods arranged in an organized,
+balanced structure. Soft diffused lighting from the left. Neutral color 
+palette of beige, grey, and soft orange. Ultra-clean 3D render suitable for
+a financial report background.
+```
+
+![Glass Bauhaus Infographic](assets/img/nano-banana-4.png)
 
 #### 5. The Cyberpunk Dashboard UI (For Gaming/Security)
 Perfect for high-energy presentations regarding cybersecurity, gaming metrics, or fast-paced markets.
 
 > **Prompt:**
-> "Futuristic HUD interface design, dark mode. Neon purple and laser blue grid lines, floating holographic data widgets, and digital waveform aesthetics. Dark background with a slight vignette. sharp vector-like lines, sci-fi aesthetic, high contrast, 4k digital art."
+```text
+Futuristic HUD interface design, dark mode. Neon purple and laser blue grid 
+lines, floating holographic data widgets, and digital waveform aesthetics. 
+Dark background with a slight vignette. sharp vector-like lines, sci-fi 
+aesthetic, high contrast, 4k digital art.
+```
+
+![Cyberpunk Dashboard UI](assets/img/nano-banana-5.png)
 
 ---
 
