@@ -7,7 +7,8 @@ import { blogPages, Page } from "../../static.pages";
 @Component({
   selector: 'app-blog-page',
   templateUrl: './blog-page.component.html',
-  styleUrls: ['./blog-page.component.scss']
+  styleUrls: ['./blog-page.component.scss'],
+  standalone: false
 })
 export class BlogPageComponent implements OnInit, OnDestroy {
 

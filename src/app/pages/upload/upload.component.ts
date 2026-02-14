@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { ButtonModule } from 'primeng/button';
-import { StepsModule } from 'primeng/steps';
+import { ProgressBar } from 'primeng/progressbar';
+
+import { Steps } from 'primeng/steps';
 import { MenuItem } from 'primeng/api';
 import { UploadService } from 'src/app/services/upload.service';
 
@@ -15,12 +15,9 @@ import { UploadService } from 'src/app/services/upload.service';
   imports: [
     FormsModule,
     CommonModule,
-    FormsModule,
     HttpClientModule,
-    ProgressBarModule,
-    ButtonModule,
-    JsonPipe,
-    StepsModule,
+    ProgressBar,
+    Steps,
   ],
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
@@ -39,7 +36,7 @@ export class UploadComponent {
     { label: 'Upload File' },
     { label: 'View Progress' },
   ];
-  constructor(private fileUploadService: UploadService) {}
+  constructor(private fileUploadService: UploadService) { }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
