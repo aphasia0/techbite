@@ -7,10 +7,10 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 })
 export class UploadService {
 
-  private apiUrl = 'http://localhost:8080/api/decrypt-pdf';
+  private apiUrl = 'https://pdf-tools.antoniogiordano.dev/api/decrypt-pdf';
 
   constructor(private http: HttpClient) { }
-
+ 
   decryptPdf(file: File, password: string): Observable<{ progress: number, blob: Blob | null }> {
     const formData: FormData = new FormData();
     formData.append('pdf', file);
