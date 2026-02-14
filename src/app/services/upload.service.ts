@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable({
@@ -7,47 +7,40 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 })
 export class UploadService {
 
-  private apiUrl = 'https://api.antoniogiordano.dev:3333/upload'; // URL del controller Spring Boot
-  private apiUrlRemovePassword = 'https://api.antoniogiordano.dev:3333/remove-password'; // URL del controller Spring Boot
+  private apiUrl = 'http://localhost:8080/api/decrypt-pdf';
 
   constructor(private http: HttpClient) { }
 
-  uploadFile(file: File): Observable<{ progress: number, filename: string | null }> {
+  decryptPdf(file: File, password: string): Observable<{ progress: number, blob: Blob | null }> {
     const formData: FormData = new FormData();
-    formData.append('file', file);
+    formData.append('pdf', file);
+    formData.append('password', password);
 
     return this.http.post(this.apiUrl, formData, {
       reportProgress: true,
       observe: 'events',
+      responseType: 'blob'
     }).pipe(
       map(event => {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             return {
               progress: event.total ? Math.round(100 * (event.loaded / event.total)) : 0,
-              filename: null
+              blob: null
             };
           case HttpEventType.Response:
-            const response = event as HttpResponse<any>;
-            return { progress: 100, filename: response.body.result }; // File uploaded successfully
+            const response = event as HttpResponse<Blob>;
+            return { progress: 100, blob: response.body };
           default:
-            return { progress: 0, filename: null };
+            return { progress: 0, blob: null };
         }
-      })
+      }),
+      catchError((error) => this.handleError(error))
     );
   }
 
-
-  removePassword(filename: String, password: String) {
-    return this.http.post(this.apiUrlRemovePassword, { password, filename }, { responseType: 'blob' }).pipe(
-      map((response: Blob) => {
-        return response;
-      }, catchError((resp) => this.handleError(resp)))
-    );
-  }
-
-   // Error handling function
-   private handleError(error: HttpErrorResponse) {
+  // Error handling function
+  private handleError(error: HttpErrorResponse) {
     let errorMessage = '';
 
     if (error.error instanceof ErrorEvent) {

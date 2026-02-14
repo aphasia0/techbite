@@ -1,81 +1,49 @@
-<div>
-  <div class="font-bold p-5">Use this simple tool to remove password from your PDF files:</div>
+<div class="flex flex-col">
+  <div class="py-6 px-4">
+    <h1 class="text-3xl dark:text-white font-extrabold mb-4">PDF Password Remover</h1>
+    <p class="text-xl dark:text-white font-light mb-6">Use this simple tool to remove password protection from your PDF
+      files</p>
+  </div>
+
   <!-- Stepper -->
-  <p-steps
-    [model]="steps"
-    [activeIndex]="activeStep"
-    [readonly]="true"
-    class="my-step"
-  ></p-steps>
+  <div class="px-4 mb-6">
+    <p-steps [model]="steps" [activeIndex]="activeStep" [readonly]="true" class="my-step"></p-steps>
+  </div>
 
-  <div class="step-content dark:bg-gray-900 bg-gray-100">
-    <!-- Step 1: File Upload -->
+  <div class="step-content dark:bg-gray-800 bg-white border border-gray-200 dark:border-gray-700 rounded-lg">
+    <!-- Step 1: File Upload & Password -->
     <div *ngIf="activeStep === 0">
-      <form
-        (ngSubmit)="onSubmit()"
-        enctype="multipart/form-data"
-        class="file-upload-form"
-      >
-        <label for="file" class="file-label">Select file:</label>
-        <input
-          type="file"
-          (change)="onFileSelected($event)"
-          class="file-input"
-        />
-        <button
-          type="submit"
-          pButton
-          label="Upload"
-          [disabled]="!selectedFile"
-          class="my-button"
-        ></button>
-      </form>
+      <form (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="file-upload-form">
+        <label for="file" class="file-label">Select PDF file:</label>
+        <input type="file" (change)="onFileSelected($event)" accept=".pdf" class="file-input" />
 
-      <div class="progress-container" *ngIf="uploadProgress >= 0">
+        <label for="pwd" class="password-label">Password:</label>
+        <input type="password" [(ngModel)]="password" name="password" class="password-input" />
+
+        <button type="submit" pButton label="Remove Password" [disabled]="!selectedFile || !password"
+          class="my-button"></button>
+      </form>
+    </div>
+
+    <!-- Step 2: Processing -->
+    <div *ngIf="activeStep === 1">
+      <div class="progress-container">
         <p-progressBar [value]="uploadProgress"></p-progressBar>
-        <p class="full-row">Upload Progress: {{ uploadProgress }}%</p>
+        <p class="processing-text">Processing: {{ uploadProgress }}%</p>
       </div>
     </div>
 
-    <!-- Step 2: Password Submission -->
-    <div *ngIf="activeStep === 1">
-      <form
-        (ngSubmit)="onSubmitPassword()"
-        enctype="multipart/form-data"
-        class="file-upload-form "
-      >
-        <label for="pwd" class="password-label">Password:</label>
-        <input
-          type="password"
-          [(ngModel)]="password"
-          name="password"
-          class="password-input"
-        />
-        <button
-          type="submit"
-          pButton
-          label="Remove Password"
-          class="my-button"
-        ></button>
-      </form>
-    </div>
-
-    <!-- Step 3: Restart -->
+    <!-- Step 3: Complete -->
     <div *ngIf="activeStep === 2">
-      <div class="grid">
-      <button
-        pButton
-        label="Restart"
-        (click)="reset()"
-        class="my-button"
-      ></button>
-    </div>
+      <div class="complete-container">
+        <button pButton label="Process Another File" (click)="reset()" class="my-button"></button>
+      </div>
     </div>
 
     <!-- Error and Message Display -->
     <div class="message">
-      <div class="error-message">{{ errorMessage }}</div>
-      <div class="success-message">{{ message }}</div>
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div class="success-message" *ngIf="message">{{ message }}</div>
     </div>
   </div>
 </div>
