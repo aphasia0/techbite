@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UploadComponent } from './pages/upload/upload.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -13,13 +12,14 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'pdf-remove-password',
-    component: UploadComponent,
-  },
-  {
     path: 'about',
     loadChildren: () =>
       import('./pages/about/about.module').then((m) => m.AboutModule),
+  },
+  {
+    path: 'my-projects',
+    loadChildren: () =>
+      import('./pages/my-projects/my-projects.module').then((m) => m.MyProjectsModule),
   },
 ];
 

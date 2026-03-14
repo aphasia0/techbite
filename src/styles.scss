@@ -1,34 +1,43 @@
 @tailwind base;
 @tailwind components;
-h1{
-  @apply text-3xl dark:text-white font-extrabold mt-2 mb-2
+
+h1 {
+  @apply text-h1 font-semibold mt-2 mb-2 dark:text-white
 }
-h3{
-  @apply text-2xl dark:text-white font-extrabold mt-2 mb-2
+
+h2 {
+  @apply text-h2 font-semibold mt-2 mb-2 dark:text-white
 }
-body{
-  @apply text-xl dark:text-white font-light
+
+h3 {
+  @apply text-h3 font-medium mt-2 mb-2 dark:text-white
 }
+
+body {
+  @apply text-base font-normal text-text-primary
+}
+
 hr {
   @apply w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700
 }
-p{
-  @apply pt-5
+
+p {
+  @apply pt-4
 }
 
-ul{
-  @apply list-disc pt-3 pl-3
+ul {
+  @apply list-disc pt-2 pl-2
 }
+
 @tailwind utilities;
 
-:root{
-  --p-primary-600: #053017;
-  --p-primary-500: #085429;
-   
+:root {
+  --p-primary-600: #059669;
+  --p-primary-500: #059669;
 }
 
-*, ::before {
+*,
+::before {
   border-width: medium;
-  border-style: revert-layer; 
+  border-style: revert-layer;
 }
-

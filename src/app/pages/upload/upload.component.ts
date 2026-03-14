@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { HttpClientModule, HttpEventType } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ProgressBar } from 'primeng/progressbar';
 import { ButtonDirective } from 'primeng/button';
 
@@ -12,15 +13,7 @@ import { UploadService } from 'src/app/services/upload.service';
 
 @Component({
   selector: 'app-upload',
-  standalone: true,
-  imports: [
-    FormsModule,
-    CommonModule,
-    HttpClientModule,
-    ProgressBar,
-    ButtonDirective,
-    Steps,
-  ],
+  standalone: false,
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
 })

@@ -1,24 +1,22 @@
 <div class="flex flex-col">
-  <div class="py-6 px-4">
-    <h1 class="text-3xl dark:text-white font-extrabold mb-4">PDF Password Remover</h1>
-    <p class="text-xl dark:text-white font-light mb-6">Use this simple tool to remove password protection from your PDF
-      files</p>
-  </div>
+
+  <app-page-header title="PDF Password Remover" subtitle="Use this simple tool to remove password protection from your PDF files"></app-page-header>
 
   <!-- Stepper -->
   <div class="px-4 mb-6">
     <p-steps [model]="steps" [activeIndex]="activeStep" [readonly]="true" class="my-step"></p-steps>
   </div>
 
-  <div class="step-content dark:bg-gray-800 bg-white border border-gray-200 dark:border-gray-700 rounded-lg">
+  <div class="step-content dark:bg-gray-800 bg-white border border-gray-200 dark:border-gray-700 rounded-xl p-6"
+    style="box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
     <!-- Step 1: File Upload & Password -->
     <div *ngIf="activeStep === 0">
       <form (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="file-upload-form">
-        <label for="file" class="file-label">Select PDF file:</label>
-        <input type="file" (change)="onFileSelected($event)" accept=".pdf" class="file-input" />
+        <label for="file" class="file-label dark:text-white">Select PDF file:</label>
+        <input type="file" (change)="onFileSelected($event)" accept=".pdf" class="file-input dark:bg-gray-700 dark:text-white" />
 
-        <label for="pwd" class="password-label">Password:</label>
-        <input type="password" [(ngModel)]="password" name="password" class="password-input" />
+        <label for="pwd" class="password-label dark:text-white">Password:</label>
+        <input type="password" [(ngModel)]="password" name="password" class="password-input dark:bg-gray-700 dark:text-white" />
 
         <button type="submit" pButton label="Remove Password" [disabled]="!selectedFile || !password"
           class="my-button"></button>
@@ -29,7 +27,7 @@
     <div *ngIf="activeStep === 1">
       <div class="progress-container">
         <p-progressBar [value]="uploadProgress"></p-progressBar>
-        <p class="processing-text">Processing: {{ uploadProgress }}%</p>
+        <p class="processing-text dark:text-white">Processing: {{ uploadProgress }}%</p>
       </div>
     </div>
 
@@ -41,7 +39,7 @@
     </div>
 
     <!-- Error and Message Display -->
-    <div class="message">
+    <div class="message mt-4">
       <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
       <div class="success-message" *ngIf="message">{{ message }}</div>
     </div>

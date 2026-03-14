@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .app-layout {
@@ -16,7 +16,7 @@ nz-sider {
 
 
 .trigger:hover {
-  color: #1890ff;
+  color: #059669;
   cursor: pointer;
 }
 
@@ -28,7 +28,7 @@ nz-sider {
 }
 
 .icon-menu {
-  font-size: 33px;
+  font-size: 32px;
   color: white;
 }
 
@@ -38,7 +38,7 @@ nz-sider {
 }
 
 .sidebar-logo-small {
-  padding-left: 27px;
+  padding-left: 24px;
 }
 
 
@@ -50,7 +50,7 @@ nz-header {
 }
 
 .app-header {
-  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 nz-content {
@@ -65,7 +65,7 @@ nz-content {
 }
 
 .search-input {
-  padding: 10px 24px;
+  padding: 8px 24px;
 }
 
 .ant-layout-header {
@@ -94,12 +94,12 @@ nz-content {
 }
 
 :host ::ng-deep .ant-switch-checked {
-  background-color: #085429;
+  background-color: #059669;
 }
 
 .date-sidebar {
   transition: transform 0.2s;
-  box-shadow: 0 2px 4px rgba(186, 9, 9, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   flex-shrink: 0;
 }
 
@@ -108,7 +108,7 @@ nz-content {
 }
 
 [nz-menu-item].ant-menu-item-selected .date-sidebar {
-  background-color: #39C643 !important;
+  background-color: #059669 !important;
 }
 
 .sidebar-title {

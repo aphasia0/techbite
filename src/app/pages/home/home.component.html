@@ -26,26 +26,27 @@
 
   <!-- Latest Posts Section -->
   <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-    <h2 class="text-3xl font-bold mb-6 dark:text-white">Latest Posts</h2>
+    <h2 class="text-h2 font-semibold mb-8 dark:text-white">Latest Posts</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <a *ngFor="let post of latestPosts" [routerLink]="'/blog/' + post.id"
-        class="latest-post-card flex flex-col p-5 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white dark:bg-gray-800">
+        class="latest-post-card flex flex-col p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 cursor-pointer bg-card dark:bg-gray-800"
+        style="box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
 
         <!-- Date Chip -->
-        <div class="flex items-start gap-3 mb-3">
+        <div class="flex items-start gap-4 mb-4">
           <div
             class="date-chip-home flex flex-col items-center justify-center rounded p-2 min-w-[50px] text-white leading-none flex-shrink-0"
-            style="background-color: #39C643;">
-            <span class="text-xs font-bold uppercase">{{post.date | date:'MMM'}}</span>
-            <span class="text-lg font-black">{{post.date | date:'d'}}</span>
+            style="background-color: #059669;">
+            <span class="text-xs font-medium uppercase">{{post.date | date:'MMM'}}</span>
+            <span class="text-lg font-semibold">{{post.date | date:'d'}}</span>
           </div>
           <div class="flex-1">
-            <h3 class="text-xl font-bold dark:text-white mb-1">{{post.title}}</h3>
+            <h3 class="text-h3 font-medium dark:text-white mb-1">{{post.title}}</h3>
           </div>
         </div>
 
         <!-- Subtitle -->
-        <p class="text-gray-600 dark:text-gray-300 text-sm mt-2">{{post.subtitle}}</p>
+        <p class="text-text-secondary dark:text-gray-300 text-sm mt-2">{{post.subtitle}}</p>
       </a>
     </div>
   </div>

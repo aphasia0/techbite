@@ -21,7 +21,6 @@ import { NzTooltipModule } from "ng-zorro-antd/tooltip";
 import { MarkdownModule } from 'ngx-markdown';
 import { PagesModule } from "./pages/pages.module";
 import { BlogPageComponent } from './pages/blog-page/blog-page.component';
-import { UploadComponent } from './pages/upload/upload.component';
 import { HomeOutline } from '@ant-design/icons-angular/icons';
 
 
@@ -50,7 +49,6 @@ registerLocaleData(en);
     NzButtonModule,
     PagesModule,
     NgOptimizedImage,
-    UploadComponent,
     NzTooltipModule,
 
   ],

@@ -10,11 +10,16 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { FormsModule } from '@angular/forms';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { UploadComponent } from './upload/upload.component';
+import { MyProjectsComponent } from './my-projects/my-projects.component';
+import { ProgressBar } from 'primeng/progressbar';
+import { ButtonDirective } from 'primeng/button';
+import { Steps } from 'primeng/steps';
 
 const routes: Routes = [
   { path: 'blog/:id', component: BlogPageComponent },
   { path: 'home', component: HomeComponent },
   { path: 'pdf-remove-password', component: UploadComponent },
+  { path: 'my-projects', component: MyProjectsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
@@ -24,8 +29,10 @@ const routes: Routes = [
     HomeComponent,
     PageHeaderComponent,
     DarkModeSwitchComponent,
+    MyProjectsComponent,
+    UploadComponent,
   ],
-  exports: [DarkModeSwitchComponent],
+  exports: [DarkModeSwitchComponent, PageHeaderComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
@@ -33,7 +40,9 @@ const routes: Routes = [
     NzSwitchModule,
     FormsModule,
     NzIconModule,
-    UploadComponent,
+    ProgressBar,
+    ButtonDirective,
+    Steps,
   ],
 })
 export class PagesModule {}
