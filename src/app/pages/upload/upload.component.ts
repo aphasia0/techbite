@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 
-import { HttpClientModule, HttpEventType } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { ProgressBar } from 'primeng/progressbar';
 import { ButtonDirective } from 'primeng/button';
 
 import { Steps } from 'primeng/steps';
 import { MenuItem } from 'primeng/api';
 import { UploadService } from 'src/app/services/upload.service';
+import { PageHeaderComponent } from '../page-header/page-header.component';
 
 @Component({
   selector: 'app-upload',
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, FormsModule, ProgressBar, ButtonDirective, Steps, PageHeaderComponent],
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
 })
@@ -30,7 +31,10 @@ export class UploadComponent {
     { label: 'Processing' },
     { label: 'Complete' },
   ];
-  constructor(private fileUploadService: UploadService) { }
+  constructor(
+    private fileUploadService: UploadService,
+    private http: HttpClient
+  ) { }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];

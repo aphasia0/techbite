@@ -11,7 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NzLayoutModule } from "ng-zorro-antd/layout";
 import { NzMenuModule } from "ng-zorro-antd/menu";
-import { RouterLink, RouterModule, RouterOutlet } from "@angular/router";
+import { RouterLink, RouterOutlet } from "@angular/router";
+import { AppRoutingModule } from './app-routing.module';
 import { NzIconModule } from "ng-zorro-antd/icon";
 import { NzSwitchModule } from "ng-zorro-antd/switch";
 import { NzInputModule } from "ng-zorro-antd/input";
@@ -19,8 +20,7 @@ import { NzAutocompleteModule } from "ng-zorro-antd/auto-complete";
 import { NzButtonModule } from "ng-zorro-antd/button";
 import { NzTooltipModule } from "ng-zorro-antd/tooltip";
 import { MarkdownModule } from 'ngx-markdown';
-import { PagesModule } from "./pages/pages.module";
-import { BlogPageComponent } from './pages/blog-page/blog-page.component';
+import { DarkModeSwitchComponent } from './pages/dark-mode-switch/dark-mode-switch.component';
 import { HomeOutline } from '@ant-design/icons-angular/icons';
 
 
@@ -31,7 +31,6 @@ registerLocaleData(en);
     AppComponent
   ],
   imports: [
-    RouterModule.forRoot([]),
     MarkdownModule.forRoot(),
 
     BrowserModule,
@@ -41,15 +40,16 @@ registerLocaleData(en);
     NzLayoutModule,
     NzMenuModule,
     RouterLink,
+    AppRoutingModule,
     NzIconModule,
     NzSwitchModule,
     NzInputModule,
     NzAutocompleteModule,
     RouterOutlet,
     NzButtonModule,
-    PagesModule,
     NgOptimizedImage,
     NzTooltipModule,
+    DarkModeSwitchComponent,
 
   ],
   providers: [

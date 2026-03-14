@@ -1,14 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 import { Subscription } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
 import { blogPages, Page } from "../../static.pages";
+import { PageHeaderComponent } from '../page-header/page-header.component';
 
 
 @Component({
   selector: 'app-blog-page',
+  standalone: true,
+  imports: [CommonModule, MarkdownModule, PageHeaderComponent],
   templateUrl: './blog-page.component.html',
   styleUrls: ['./blog-page.component.scss'],
-  standalone: false
 })
 export class BlogPageComponent implements OnInit, OnDestroy {
 

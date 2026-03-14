@@ -1,26 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { BlogPageComponent } from './pages/blog-page/blog-page.component';
+import { UploadComponent } from './pages/upload/upload.component';
+import { MyProjectsComponent } from './pages/my-projects/my-projects.component';
+import { AboutComponent } from './pages/about/about.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
-  {
-    path: 'blog',
-    loadChildren: () => import('./blog/blog.module').then((m) => m.BlogModule),
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-  },
-  {
-    path: 'about',
-    loadChildren: () =>
-      import('./pages/about/about.module').then((m) => m.AboutModule),
-  },
-  {
-    path: 'my-projects',
-    loadChildren: () =>
-      import('./pages/my-projects/my-projects.module').then((m) => m.MyProjectsModule),
-  },
+  { path: 'home', component: HomeComponent },
+  { path: 'blog/:id', component: BlogPageComponent },
+  { path: 'pdf-remove-password', component: UploadComponent },
+  { path: 'my-projects', component: MyProjectsComponent },
+  { path: 'about', component: AboutComponent },
 ];
 
 @NgModule({

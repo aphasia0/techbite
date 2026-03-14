@@ -1,29 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-page-header',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './page-header.component.html',
   styleUrls: ['./page-header.component.scss'],
-  standalone: false
 })
 export class PageHeaderComponent implements OnInit {
-  @Input()
-  title: string | undefined;
-  @Input()
-  subtitle: string | undefined;
+  @Input() title: string | undefined;
+  @Input() subtitle: string | undefined;
+  @Input() image: string | undefined;
+  @Input() imageStyle: string | undefined;
+  @Input() date: string | undefined;
 
-  @Input()
-  image: string | undefined;
-  //cover or scale-down
-  @Input()
-  imageStyle: string | undefined;
-  @Input()
-  date: string | undefined;
+  isRendered = false;
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.isRendered = true;
+    console.log('PageHeaderComponent initialized with title:', this.title);
   }
 
   get month(): string {

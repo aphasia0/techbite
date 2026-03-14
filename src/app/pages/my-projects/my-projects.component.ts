@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PageHeaderComponent } from '../page-header/page-header.component';
 
 interface Project {
   name: string;
@@ -10,9 +12,10 @@ interface Project {
 
 @Component({
   selector: 'app-my-projects',
+  standalone: true,
+  imports: [CommonModule, PageHeaderComponent],
   templateUrl: './my-projects.component.html',
   styleUrls: ['./my-projects.component.scss'],
-  standalone: false
 })
 export class MyProjectsComponent {
   projects: Project[] = [
