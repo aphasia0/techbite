@@ -1,53 +1,37 @@
-<div class="flex flex-col">
-  <app-page-header title="Random tech stories" subtitle="From a full stack (overflow) developer" imageStyle="cover"
-    image="assets/img/coding.jpeg"></app-page-header>
+<div class="home-page page-container">
+  <header class="home-hero">
+    <div class="home-hero-copy">
+      <h1>Random tech stories</h1>
+      <p class="home-hero-subtitle">From a full stack (overflow) developer</p>
+      <p class="intro-lead">Hi there. I’m <strong>Antonio Giordano</strong>, a software developer from Italy.</p>
+      <div class="intro-copy">
+        <p>I share personal notes on Angular, Java, Spring, Web3 and Solidity, with occasional experiments in Flutter. Follow my <a class="text-link" href="https://twitter.com/search?q=%23100DaysOfCode&amp;src=hashtag_click" target="_blank" rel="noopener noreferrer">#100DaysOfCode</a> challenge on X.</p>
+        <p>This site is open source, built with <a class="text-link" href="https://angular.io/" target="_blank" rel="noopener noreferrer">Angular</a>, <a class="text-link" href="https://ng.ant.design/docs/introduce/en" target="_blank" rel="noopener noreferrer">ng-zorro</a> and <a class="text-link" href="https://primeng.org/" target="_blank" rel="noopener noreferrer">PrimeNG</a>. <a class="text-link" href="https://github.com/aphasia0/techbite" target="_blank" rel="noopener noreferrer">View the repository</a>.</p>
+      </div>
+    </div>
+    <div class="home-hero-media">
+      <img src="assets/img/coding.jpeg" alt="A screen showing lines of code" />
+    </div>
+  </header>
 
-  <div class="py-2">
-    <p>
-      Hi there. I'm <span class="font-bold">Antonio Giordano</span>, a software developer from Italy
-      <img class="inline h-7" src="https://img.icons8.com/color/48/000000/italy.png" />
-    </p>
-    <p class="py-2">
-      Sharing here my personal taught about technologies.
-      I use on daily basis Angular, Java and Spring, interested in web 3.0 and Solidity language.
-      Having fun right now with flutter, follow my <a class="underline font-extrabold"
-        href="https://twitter.com/search?q=%23100DaysOfCode&src=hashtag_click">#100DaysOfCode</a> challenge on X.
-    </p>
-    <p class="py-2">
-      This site is open source, made with <a class="underline font-extrabold" href="https://angular.io/">Angular</a>, <a
-        class="underline font-extrabold" href="https://ng.ant.design/docs/introduce/en">ng-zorro</a>
-      and <a class="underline font-extrabold" href="https://primeng.org/">primeNG</a>
-    </p>
-    <p class="py-2">
-      Here you can find the repository: <a class="underline font-extrabold"
-        href="https://github.com/aphasia0/techbite">https://github.com/aphasia0/techbite</a>
-    </p>
-  </div>
-
-  <!-- Latest Posts Section -->
-  <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-    <h2 class="text-h2 font-semibold mb-8 dark:text-white">Latest Posts</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <a *ngFor="let post of latestPosts" [routerLink]="'/blog/' + post.id"
-        class="latest-post-card flex flex-col p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 cursor-pointer bg-card dark:bg-gray-800"
-        style="box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-
-        <!-- Date Chip -->
-        <div class="flex items-start gap-4 mb-4">
-          <div
-            class="date-chip-home flex flex-col items-center justify-center rounded p-2 min-w-[50px] text-white leading-none flex-shrink-0"
-            style="background-color: #059669;">
-            <span class="text-xs font-medium uppercase">{{post.date | date:'MMM'}}</span>
-            <span class="text-lg font-semibold">{{post.date | date:'d'}}</span>
-          </div>
-          <div class="flex-1">
-            <h3 class="text-h3 font-medium dark:text-white mb-1">{{post.title}}</h3>
-          </div>
+  <section class="latest-posts" aria-labelledby="latest-title">
+    <div class="section-heading">
+      <h2 id="latest-title">Latest stories</h2>
+      <p>Practical notes, experiments, and things worth sharing.</p>
+    </div>
+    <div class="story-grid">
+      <a *ngFor="let post of latestPosts; let first = first" [routerLink]="['/blog', post.id]" class="story-card">
+        <div class="story-photo">
+          <img [src]="post.image" [alt]="post.title" loading="lazy" />
+          <span class="new-badge" *ngIf="first">NEW</span>
         </div>
-
-        <!-- Subtitle -->
-        <p class="text-text-secondary dark:text-gray-300 text-sm mt-2">{{post.subtitle}}</p>
+        <div class="story-meta">
+          <time [attr.datetime]="post.date">{{ post.date | date:'MMM d, y' }}</time>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.subtitle }}</p>
+          <span class="read-story">Read story <i nz-icon nzType="arrow-right" nzTheme="outline"></i></span>
+        </div>
       </a>
     </div>
-  </div>
+  </section>
 </div>

@@ -1,65 +1,61 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { blogPages, Page } from "./static.pages";
-import { Router } from "@angular/router";
+import { blogPages, Page } from './static.pages';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: false
+  standalone: false,
 })
 export class AppComponent {
-  options: string[] | undefined = [] as any;
-  isCollapsed = false;
-  isDark: any;
-  links: Page[] = blogPages;
-  topLinks: Page[] = [];
-  olderLinks: Page[] = [];
-  model: any;
+  options: string[] = [];
+  links: Page[] = [...blogPages].sort((a, b) => b.date.localeCompare(a.date));
+  topLinks: Page[] = this.links.slice(0, 3);
+  model = '';
+  isMenuOpen = false;
+  isSearchOpen = false;
+  currentYear = new Date().getFullYear();
 
-  constructor(private router: Router) {
-    this.initLinks();
-  }
-
-  private initLinks() {
-    this.links = [...blogPages].sort((a, b) => b.date.localeCompare(a.date));
-    this.topLinks = this.links.slice(0, 3);
-    this.olderLinks = this.links.slice(3);
-  }
+  constructor(private router: Router) {}
 
   onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this.options = this.links
-      ?.map((x) => (x.title ? x.title : ''))
-      .filter((x) => x.toUpperCase().includes(value.toUpperCase()));
+      .map((page) => page.title)
+      .filter((title) => title.toLowerCase().includes(value.toLowerCase()));
+    this.isSearchOpen = true;
   }
 
-  search(f: NgForm) {
-    const route = this.links?.filter(x => x.title === f.value.search).map(x => 'blog/' + x.id)
-    if (route && route.length > 0) {
-      this.router.navigate(route).then(
-        () => this.model = ''
-      );
+  search(form: NgForm): void {
+    const query = (form.value.search || '').trim().toLowerCase();
+    const match = this.links.find((page) => page.title.toLowerCase().includes(query));
+    if (query && match) {
+      this.openPage(match.id);
     }
   }
 
-  call(ss: any) {
-    ss ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
-  }
-
-  test() {
-    if (this.shouldBeClosed()) {
-      this.isCollapsed = true;
+  selectOption(title: string): void {
+    const match = this.links.find((page) => page.title === title);
+    if (match) {
+      this.openPage(match.id);
     }
   }
 
-  shouldBeClosed(): boolean {
-    return window.innerWidth < 768;
+  select(): void {
+    this.options = this.links.map((page) => page.title);
+    this.isSearchOpen = true;
   }
 
-  select() {
-    this.options = this.links
-      ?.map((x) => (x.title ? x.title : ''));
+  closeNavigation(): void {
+    this.isMenuOpen = false;
+    this.isSearchOpen = false;
+  }
+
+  private openPage(id: string): void {
+    this.model = '';
+    this.closeNavigation();
+    void this.router.navigate(['blog', id]);
   }
 }

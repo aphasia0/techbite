@@ -1,44 +1,38 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
-import { Subscription } from "rxjs";
-import { blogPages, Page } from "../../static.pages";
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { Subscription } from 'rxjs';
+import { blogPages, Page } from '../../static.pages';
 import { PageHeaderComponent } from '../page-header/page-header.component';
-
 
 @Component({
   selector: 'app-blog-page',
   standalone: true,
-  imports: [CommonModule, MarkdownModule, PageHeaderComponent],
+  imports: [MarkdownModule, PageHeaderComponent, RouterLink, NzIconModule],
   templateUrl: './blog-page.component.html',
   styleUrls: ['./blog-page.component.scss'],
 })
 export class BlogPageComponent implements OnInit, OnDestroy {
-
   private sub: Subscription | undefined;
-  id: string = '';
   page: Page | undefined;
 
-  constructor(
-    private route: ActivatedRoute
-  ) {
-  }
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = params['id'];
-      this.page = blogPages.filter(x => x.id === this.id)[0];
+  ngOnInit(): void {
+    this.sub = this.route.params.subscribe((params) => {
+      const id = params['id'];
+      this.page = blogPages.find((page) => page.id === id);
       if (!this.page) {
         this.page = {
-          id: this.id,
-          title: "Sorry, page not found",
-          image: "assets/img/sorry.jpg",
-          subtitle: "",
-          filename: "",
-          imageStyle: "cover",
-          date: ""
-        }
+          id,
+          title: 'Sorry, page not found',
+          image: 'assets/img/sorry.jpg',
+          subtitle: '',
+          filename: '',
+          imageStyle: 'cover',
+          date: '',
+        };
       }
     });
   }
@@ -47,4 +41,3 @@ export class BlogPageComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 }
-

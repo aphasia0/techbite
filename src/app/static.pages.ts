@@ -71,5 +71,14 @@ export const blogPages: Page[] = [
     image: "assets/img/n8n-hero.webp",
     imageStyle: "cover",
     date: "2026-02-07"
+  },
+  {
+    id: "ai-in-the-us",
+    title: "AI in the US: Bots, Ballots, and Business Agents",
+    subtitle: "What X/Twitter is saying about AI in America right now",
+    filename: "assets/md/ai-in-the-us.md",
+    image: "assets/img/ai-us-hero.svg",
+    imageStyle: "cover",
+    date: "2026-11-14"
   }
 ]

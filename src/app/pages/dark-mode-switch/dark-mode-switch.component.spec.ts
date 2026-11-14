@@ -8,7 +8,7 @@ describe('DarkModeSwitchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DarkModeSwitchComponent]
+      imports: [DarkModeSwitchComponent]
     });
     fixture = TestBed.createComponent(DarkModeSwitchComponent);
     component = fixture.componentInstance;

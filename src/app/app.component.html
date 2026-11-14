@@ -1,106 +1,81 @@
-<nz-layout class="app-layout">
-  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null" [nzCollapsedWidth]="0">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="top-nav page-container">
+    <a class="brand" routerLink="/home" aria-label="Techbite home" (click)="closeNavigation()">
+      <img src="assets/img/default-no-text.svg" alt="" width="34" height="34" />
+      <span>techbite</span>
+    </a>
 
-    <div class="h-full flex flex-col">
-
-      <a class="sidebar-logo p-4 icon-container" href="/home">
-        <img ngSrc="assets/img/default-monochrome.svg" alt="logo" height="16" width="16" />
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <i nz-icon nzType="home" nzTheme="outline"></i><span>Stories</span>
       </a>
+      <a routerLink="/my-projects" routerLinkActive="active">
+        <i nz-icon nzType="appstore" nzTheme="outline"></i><span>Projects</span>
+      </a>
+      <a routerLink="/pdf-remove-password" routerLinkActive="active">
+        <i nz-icon nzType="tool" nzTheme="outline"></i><span>Tools</span>
+      </a>
+    </nav>
 
-      <ul nz-menu nzOpen nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li (click)="test()" nzMatchRouter routerLink="/home" nz-menu-item>
-          <i nz-icon nzType="home"></i>
-          <span>Home</span>
-        </li>
-        <li nz-submenu nzOpen nzTitle="Latest Posts" nzIcon="highlight">
-          <ul>
-            <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of topLinks">
-              <a [routerLink]="'blog/'+page.id" class="flex items-center gap-3 w-full">
-                <div
-                  class="date-sidebar flex flex-col items-center justify-center rounded p-1 min-w-[40px] bg-primary-600 text-white leading-none">
-                  <span class="text-[9px] font-medium uppercase">{{page.date | date:'MMM'}}</span>
-                  <span class="text-sm font-semibold">{{page.date | date:'d'}}</span>
-                </div>
-                <span class="sidebar-title">{{ page.title }}</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li nz-submenu [nzOpen]="false" nzTitle="Older Posts" nzIcon="history" *ngIf="olderLinks.length > 0">
-          <ul>
-            <li nz-menu-item (click)="test()" nzMatchRouter *ngFor="let page of olderLinks">
-              <a [routerLink]="'blog/'+page.id" class="flex items-center gap-3 w-full">
-                <div
-                  class="date-sidebar flex flex-col items-center justify-center rounded p-1 min-w-[40px] bg-primary-600 text-white leading-none">
-                  <span class="text-[9px] font-medium uppercase">{{page.date | date:'MMM'}}</span>
-                  <span class="text-sm font-semibold">{{page.date | date:'d'}}</span>
-                </div>
-                <span class="sidebar-title">{{ page.title }}</span>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li (click)="test()" nzMatchRouter routerLink="/pdf-remove-password" nz-menu-item>
-          <i nz-icon nzType="file-pdf"></i>
-          <span>Pdf remove password</span>
-        </li>
-        <li (click)="test()" nzMatchRouter routerLink="/my-projects" nz-menu-item>
-          <i nz-icon nzType="appstore"></i>
-          <span>My Projects</span>
-        </li>
-
-      </ul>
-      <div class="mt-auto grid grid-cols-3 p-8">
-
-        <a class="icon-container" href="https://twitter.com/aphasia0" target="_blank">
-          <i class="icon-menu" nz-icon nzType="twitter"></i>
-        </a>
-
-        <a class="icon-container" href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank">
-          <i class="icon-menu" nz-icon nzType="linkedin" nzTheme="outline"></i>
-        </a>
-        <a class="icon-container" href="https://github.com/aphasia0" target="_blank">
-          <i class="icon-menu" nz-icon nzType="github" nzTheme="outline"></i>
-        </a>
+    <div class="nav-actions">
+      <div class="search-container">
+        <form class="global-search" role="search" (ngSubmit)="search(searchForm)" #searchForm="ngForm">
+          <label class="search-copy" for="story-search">
+            <span>Search</span>
+            <input id="story-search" name="search" type="search" autocomplete="off" placeholder="Find a story"
+              [(ngModel)]="model" (input)="onInput($event)" (focus)="select()" (keydown.escape)="isSearchOpen = false" />
+          </label>
+          <button class="search-orb" type="submit" aria-label="Submit search">
+            <i nz-icon nzType="search" nzTheme="outline"></i>
+          </button>
+        </form>
+        <div class="search-results" *ngIf="isSearchOpen && options.length > 0">
+          <button type="button" *ngFor="let option of options" (click)="selectOption(option)">{{ option }}</button>
+        </div>
+        <div class="search-results search-empty" *ngIf="isSearchOpen && model.trim() && options.length === 0" aria-live="polite">No stories found</div>
       </div>
-
+      <button class="menu-button" type="button" aria-label="Toggle navigation" [attr.aria-expanded]="isMenuOpen"
+        (click)="isMenuOpen = !isMenuOpen; isSearchOpen = false">
+        <i nz-icon [nzType]="isMenuOpen ? 'close' : 'menu'" nzTheme="outline"></i>
+      </button>
     </div>
+  </div>
 
-  </nz-sider>
-  <nz-layout [ngClass]="!isCollapsed && !shouldBeClosed()  ? 'right-layout' : 'right-layout-0'">
-    <nz-header [ngClass]="!isCollapsed && shouldBeClosed() ? 'right-layout' : 'right-layout-0'">
-      <div class="p-2 app-header flex flex-row bg-bg dark:bg-primary dark:text-white">
-        <div class="p-1 flex-none w-14">
-          <i (click)="isCollapsed = !isCollapsed" class="cursor-pointer" nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
-        </div>
-        <div>
-          <app-dark-mode-switch></app-dark-mode-switch>
-        </div>
-        <div class="flex-none md:flex-1"></div>
-        <div class="flex-1">
-          <form #f="ngForm" nz-form (ngSubmit)="search(f)">
-            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixIconButton">
-              <input (focus)="select()" class="search-box" name="search" placeholder="Search" nz-input
-                [(ngModel)]="model" (input)="onInput($event)" [nzAutocomplete]="auto" />
-            </nz-input-group>
-            <ng-template #suffixIconButton>
-              <button nz-button nzType="primary" nzSize="large" nzSearch>
-                <i nz-icon nzType="search" nzTheme="outline"></i>
-              </button>
-            </ng-template>
-            <nz-autocomplete [nzDataSource]="options" nzBackfill #auto></nz-autocomplete>
+  <nav class="mobile-menu" *ngIf="isMenuOpen" aria-label="Mobile navigation">
+    <a routerLink="/home" (click)="closeNavigation()"><i nz-icon nzType="home"></i>Stories</a>
+    <a routerLink="/my-projects" (click)="closeNavigation()"><i nz-icon nzType="appstore"></i>Projects</a>
+    <a routerLink="/pdf-remove-password" (click)="closeNavigation()"><i nz-icon nzType="tool"></i>PDF password remover</a>
+  </nav>
+</header>
 
-          </form>
-        </div>
-      </div>
-    </nz-header>
-    <nz-content class="dark:bg-gray-500">
-      <div
-        class="inner-content py-16 px-8 md:px-24 xl:px-36 bg-bg dark:bg-gray-900 dark:text-white max-w-[1200px] mx-auto">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-  </nz-layout>
-</nz-layout>
+<main id="main-content" class="site-main">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="site-footer">
+  <div class="page-container">
+    <div class="footer-grid">
+      <section>
+        <h2>Explore</h2>
+        <a routerLink="/home">Latest stories</a>
+        <a routerLink="/my-projects">My projects</a>
+        <a routerLink="/pdf-remove-password">PDF password remover</a>
+      </section>
+      <section>
+        <h2>Recent notes</h2>
+        <a *ngFor="let page of topLinks" [routerLink]="['/blog', page.id]">{{ page.title }}</a>
+      </section>
+      <section>
+        <h2>Connect</h2>
+        <a href="https://github.com/aphasia0" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/antonio-giordano-b1673a36/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://twitter.com/aphasia0" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+      </section>
+    </div>
+    <div class="legal-band">
+      <span>© {{ currentYear }} Techbite</span>
+      <span>Notes on code, tools, and the work between them.</span>
+    </div>
+  </div>
+</footer>

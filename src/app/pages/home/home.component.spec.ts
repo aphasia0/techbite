@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
+import { IconsProviderModule } from '../../icons-provider.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,9 +9,8 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
-    })
-    .compileComponents();
+      imports: [HomeComponent, RouterModule.forRoot([]), IconsProviderModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

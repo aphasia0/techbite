@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 
@@ -7,7 +7,9 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 })
 export class UploadService {
 
-  private apiUrl = 'https://pdf-tools.antoniogiordano.dev/api/decrypt-pdf';
+  private apiUrl = isDevMode()
+    ? '/api/decrypt-pdf'
+    : 'https://pdf-tools.antoniogiordano.dev/api/decrypt-pdf';
 
   constructor(private http: HttpClient) { }
  

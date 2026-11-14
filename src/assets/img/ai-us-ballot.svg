@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" role="img" aria-label="AI data center servers connected to a ballot box">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#191919"/>
+      <stop offset="1" stop-color="#221d1e"/>
+    </linearGradient>
+    <radialGradient id="glow2" cx="0.5" cy="0.42" r="0.85">
+      <stop offset="0" stop-color="#ff385c" stop-opacity="0.13"/>
+      <stop offset="0.6" stop-color="#ff385c" stop-opacity="0.03"/>
+      <stop offset="1" stop-color="#ff385c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="700" fill="url(#bg2)"/>
+  <rect width="1600" height="700" fill="url(#glow2)"/>
+  <g stroke="#2a2a2a" stroke-width="1">
+    <line x1="0" y1="175" x2="1600" y2="175"/>
+    <line x1="0" y1="350" x2="1600" y2="350"/>
+    <line x1="0" y1="525" x2="1600" y2="525"/>
+    <line x1="267" y1="0" x2="267" y2="700"/>
+    <line x1="533" y1="0" x2="533" y2="700"/>
+    <line x1="800" y1="0" x2="800" y2="700"/>
+    <line x1="1067" y1="0" x2="1067" y2="700"/>
+    <line x1="1333" y1="0" x2="1333" y2="700"/>
+  </g>
+
+  <!-- server racks -->
+  <g>
+    <g transform="translate(140,150)">
+      <rect width="200" height="400" rx="16" fill="#232323" stroke="#3a3a3a" stroke-width="1.5"/>
+      <g stroke="#333" stroke-width="1.5">
+        <line x1="24" y1="90" x2="176" y2="90"/>
+        <line x1="24" y1="150" x2="176" y2="150"/>
+        <line x1="24" y1="210" x2="176" y2="210"/>
+        <line x1="24" y1="270" x2="176" y2="270"/>
+        <line x1="24" y1="330" x2="176" y2="330"/>
+      </g>
+      <g fill="#ff385c">
+        <circle cx="42" cy="58" r="5"/>
+        <circle cx="42" cy="178" r="5" fill="#4d4d4d"/>
+        <circle cx="42" cy="298" r="5"/>
+      </g>
+      <rect x="120" y="42" width="56" height="10" rx="5" fill="#3a3a3a"/>
+      <rect x="120" y="162" width="56" height="10" rx="5" fill="#3a3a3a"/>
+      <rect x="120" y="282" width="56" height="10" rx="5" fill="#3a3a3a"/>
+    </g>
+    <g transform="translate(380,150)">
+      <rect width="200" height="400" rx="16" fill="#232323" stroke="#3a3a3a" stroke-width="1.5"/>
+      <g stroke="#333" stroke-width="1.5">
+        <line x1="24" y1="90" x2="176" y2="90"/>
+        <line x1="24" y1="150" x2="176" y2="150"/>
+        <line x1="24" y1="210" x2="176" y2="210"/>
+        <line x1="24" y1="270" x2="176" y2="270"/>
+        <line x1="24" y1="330" x2="176" y2="330"/>
+      </g>
+      <g fill="#ff385c">
+        <circle cx="42" cy="58" r="5" fill="#4d4d4d"/>
+        <circle cx="42" cy="178" r="5"/>
+        <circle cx="42" cy="298" r="5" fill="#4d4d4d"/>
+      </g>
+      <rect x="120" y="42" width="56" height="10" rx="5" fill="#3a3a3a"/>
+      <rect x="120" y="162" width="56" height="10" rx="5" fill="#3a3a3a"/>
+      <rect x="120" y="282" width="56" height="10" rx="5" fill="#3a3a3a"/>
+    </g>
+    <g transform="translate(620,150)">
+      <rect width="200" height="400" rx="16" fill="#232323" stroke="#3a3a3a" stroke-width="1.5"/>
+      <g stroke="#333" stroke-width="1.5">
+        <line x1="24" y1="90" x2="176" y2="90"/>
+        <line x1="24" y1="150" x2="176" y2="150"/>
+        <line x1="24" y1="210" x2="176" y2="210"/>
+        <line x1="24" y1="270" x2="176" y2="270"/>
+        <line x1="24" y1="330" x2="176" y2="330"/>
+      </g>
+      <g fill="#ff385c">
+        <circle cx="42" cy="58" r="5"/>
+        <circle cx="42" cy="178" r="5" fill="#4d4d4d"/>
+        <circle cx="42" cy="298" r="5"/>
+      </g>
+      <rect x="120" y="42" width="56" height="10" rx="5" fill="#3a3a3a"/>
+      <rect x="120" y="162" width="56" height="10" rx="5" fill="#3a3a3a"/>
+      <rect x="120" y="282" width="56" height="10" rx="5" fill="#3a3a3a"/>
+    </g>
+    <text x="370" y="610" fill="#8a8a8a" font-size="17" font-weight="600" letter-spacing="3" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif">AI DATA CENTERS</text>
+  </g>
+
+  <!-- cable -->
+  <path d="M820 430 C 900 430 960 430 1052 430" fill="none" stroke="#ff385c" stroke-opacity="0.5" stroke-width="3"/>
+  <circle cx="820" cy="430" r="6" fill="#ff385c"/>
+  <circle cx="1052" cy="430" r="6" fill="#ff385c"/>
+
+  <!-- ballot box -->
+  <g transform="translate(1060,250)">
+    <rect width="320" height="240" rx="22" fill="#232323" stroke="#3a3a3a" stroke-width="1.5"/>
+    <rect x="60" y="-16" width="200" height="30" rx="12" fill="#2e2e2e" stroke="#3a3a3a" stroke-width="1.5"/>
+    <rect x="150" y="60" width="20" height="120" rx="6" fill="#3a3a3a" opacity="0.6"/>
+    <g transform="rotate(-10 160 90)">
+      <rect x="90" y="-70" width="140" height="190" rx="10" fill="#f2f2f2"/>
+      <g stroke="#d4d4d4" stroke-width="6" stroke-linecap="round">
+        <line x1="115" y1="-30" x2="205" y2="-30"/>
+        <line x1="115" y1="0" x2="185" y2="0"/>
+        <line x1="115" y1="30" x2="175" y2="30"/>
+      </g>
+      <path d="M120 78 L150 108 L205 48" fill="none" stroke="#ff385c" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="160" y="316" fill="#8a8a8a" font-size="17" font-weight="600" letter-spacing="3" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif">ON THE BALLOT</text>
+  </g>
+</svg>

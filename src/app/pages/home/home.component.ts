@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { blogPages, Page } from '../../static.pages';
-import { PageHeaderComponent } from '../page-header/page-header.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, PageHeaderComponent],
+  imports: [CommonModule, RouterLink, NzIconModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  latestPosts: Page[];
-
-  constructor() {
-    this.latestPosts = [...blogPages]
-      .sort((a, b) => b.date.localeCompare(a.date))
-      .slice(0, 3);
-  }
+  latestPosts: Page[] = [...blogPages]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 3);
 }
