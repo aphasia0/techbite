@@ -1,0 +1,38 @@
+.stories-page { padding-top: 48px; }
+.stories-summary { margin-top: 8px; color: var(--color-muted); font-size: 14px; line-height: 20px; }
+.stories-loading { margin-top: 32px; color: var(--color-muted); font-size: 14px; }
+
+.year-groups { display: flex; flex-direction: column; gap: 48px; margin-top: 36px; }
+.year-heading { display: flex; align-items: baseline; gap: 12px; margin: 0 0 8px; padding-bottom: 12px; border-bottom: 1px solid var(--color-hairline); font-size: 28px; font-weight: 700; line-height: 1.2; }
+.year-count { color: var(--color-muted); font-size: 14px; font-weight: 500; }
+
+.story-list { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.story-list li + li { border-top: 1px solid var(--color-hairline-soft); }
+
+.story-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) 96px 24px; align-items: center; gap: 20px; padding: 18px 12px; border-radius: 12px; transition: background 160ms ease; }
+.story-row:hover { background: var(--color-surface-soft); }
+
+.story-date { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--color-muted); line-height: 1; }
+.date-month { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.date-day { margin-top: 4px; color: var(--color-ink); font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+
+.story-body { display: flex; min-width: 0; flex-direction: column; gap: 4px; }
+.story-title { color: var(--color-ink); font-size: 18px; font-weight: 600; line-height: 1.3; }
+.story-subtitle { color: var(--color-muted); font-size: 14px; line-height: 1.4; }
+
+.story-thumb { overflow: hidden; width: 96px; aspect-ratio: 4 / 3; border-radius: 10px; background: var(--color-surface-soft); }
+.story-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 200ms ease; }
+.story-row:hover .story-thumb img { transform: scale(1.04); }
+
+.story-arrow { color: var(--color-muted); font-size: 16px; transition: transform 160ms ease, color 160ms ease; }
+.story-row:hover .story-arrow { color: var(--color-primary); transform: translateX(3px); }
+
+@media (max-width: 743px) {
+  .stories-page { padding-top: 32px; }
+  .year-groups { gap: 36px; margin-top: 28px; }
+  .year-heading { font-size: 24px; }
+  .story-row { grid-template-columns: 52px minmax(0, 1fr) 20px; gap: 14px; padding: 16px 4px; }
+  .story-thumb { display: none; }
+  .date-day { font-size: 20px; }
+  .story-title { font-size: 16px; }
+}

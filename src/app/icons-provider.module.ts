@@ -10,6 +10,7 @@ import {
   MenuOutline,
   SearchOutline,
   ToolOutline,
+  UnorderedListOutline,
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -22,6 +23,7 @@ const icons = [
   MenuOutline,
   SearchOutline,
   ToolOutline,
+  UnorderedListOutline,
 ];
 
 @NgModule({

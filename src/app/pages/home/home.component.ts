@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { blogPages, Page } from '../../static.pages';
+import { map } from 'rxjs';
+import { BlogService } from '../../services/blog.service';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { blogPages, Page } from '../../static.pages';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  latestPosts: Page[] = [...blogPages]
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 3);
+  latestPosts$ = this.blogService.getPages().pipe(map((pages) => pages.slice(0, 3)));
+
+  constructor(private blogService: BlogService) {}
 }

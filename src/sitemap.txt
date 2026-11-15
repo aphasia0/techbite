@@ -1,4 +1,5 @@
 https://antoniogiordano.dev/home
+https://antoniogiordano.dev/stories
 https://antoniogiordano.dev/my-projects
 https://antoniogiordano.dev/about
 https://antoniogiordano.dev/pdf-remove-password

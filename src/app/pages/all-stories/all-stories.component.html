@@ -1,0 +1,47 @@
+<div class="stories-page page-container">
+  <app-page-header
+    title="All stories"
+    subtitle="Every note, experiment and thing worth sharing — newest first."
+  ></app-page-header>
+
+  <ng-container *ngIf="view$ | async as view; else loading">
+    <p class="stories-summary" *ngIf="view.total">
+      {{ view.total }} {{ view.total === 1 ? 'story' : 'stories' }}
+    </p>
+
+    <div class="year-groups">
+      <section class="year-group" *ngFor="let group of view.groups">
+        <h2 class="year-heading">
+          <span>{{ group.year }}</span>
+          <span class="year-count">{{ group.pages.length }}</span>
+        </h2>
+
+        <ol class="story-list">
+          <li *ngFor="let post of group.pages">
+            <a class="story-row" [routerLink]="['/blog', post.id]">
+              <time class="story-date" [attr.datetime]="post.date">
+                <span class="date-month">{{ post.date | date: 'MMM' }}</span>
+                <span class="date-day">{{ post.date | date: 'd' }}</span>
+              </time>
+
+              <span class="story-body">
+                <span class="story-title">{{ post.title }}</span>
+                <span class="story-subtitle" *ngIf="post.subtitle">{{ post.subtitle }}</span>
+              </span>
+
+              <span class="story-thumb">
+                <img *ngIf="post.image" [src]="post.image" [alt]="post.title" loading="lazy" />
+              </span>
+
+              <i nz-icon nzType="arrow-right" nzTheme="outline" class="story-arrow"></i>
+            </a>
+          </li>
+        </ol>
+      </section>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <p class="stories-loading">Loading stories…</p>
+  </ng-template>
+</div>

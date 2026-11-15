@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { blogPages, Page } from './static.pages';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { BlogService } from './services/blog.service';
+import { Page } from './models/page.model';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +11,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
   standalone: false,
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   options: string[] = [];
-  links: Page[] = [...blogPages].sort((a, b) => b.date.localeCompare(a.date));
-  topLinks: Page[] = this.links.slice(0, 3);
+  links: Page[] = [];
+  topLinks: Page[] = [];
   model = '';
   isMenuOpen = false;
   isSearchOpen = false;
   currentYear = new Date().getFullYear();
+  private sub: Subscription | undefined;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private blogService: BlogService) {}
+
+  ngOnInit(): void {
+    this.sub = this.blogService.getPages().subscribe((pages) => {
+      this.links = pages;
+      this.topLinks = pages.slice(0, 3);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
 
   onInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;

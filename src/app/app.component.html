@@ -7,8 +7,8 @@
     </a>
 
     <nav class="desktop-nav" aria-label="Primary navigation">
-      <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <i nz-icon nzType="home" nzTheme="outline"></i><span>Stories</span>
+      <a routerLink="/stories" routerLinkActive="active">
+        <i nz-icon nzType="unordered-list" nzTheme="outline"></i><span>Stories</span>
       </a>
       <a routerLink="/my-projects" routerLinkActive="active">
         <i nz-icon nzType="appstore" nzTheme="outline"></i><span>Projects</span>
@@ -43,7 +43,7 @@
   </div>
 
   <nav class="mobile-menu" *ngIf="isMenuOpen" aria-label="Mobile navigation">
-    <a routerLink="/home" (click)="closeNavigation()"><i nz-icon nzType="home"></i>Stories</a>
+    <a routerLink="/stories" (click)="closeNavigation()"><i nz-icon nzType="unordered-list"></i>Stories</a>
     <a routerLink="/my-projects" (click)="closeNavigation()"><i nz-icon nzType="appstore"></i>Projects</a>
     <a routerLink="/pdf-remove-password" (click)="closeNavigation()"><i nz-icon nzType="tool"></i>PDF password remover</a>
   </nav>
@@ -59,6 +59,7 @@
       <section>
         <h2>Explore</h2>
         <a routerLink="/home">Latest stories</a>
+        <a routerLink="/stories">All stories</a>
         <a routerLink="/my-projects">My projects</a>
         <a routerLink="/pdf-remove-password">PDF password remover</a>
       </section>

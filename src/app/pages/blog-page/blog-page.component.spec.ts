@@ -3,8 +3,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RouterModule } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
+import { of } from 'rxjs';
 import { BlogPageComponent } from './blog-page.component';
 import { IconsProviderModule } from '../../icons-provider.module';
+import { BlogService } from '../../services/blog.service';
 
 describe('BlogPageComponent', () => {
   let component: BlogPageComponent;
@@ -13,7 +15,17 @@ describe('BlogPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BlogPageComponent, RouterModule.forRoot([]), MarkdownModule.forRoot(), IconsProviderModule],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: BlogService,
+          useValue: {
+            getPages: () => of([]),
+            getPage: () => of(undefined),
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BlogPageComponent);

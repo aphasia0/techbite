@@ -2,5 +2,5 @@
   <a class="back-link" routerLink="/home"><i nz-icon nzType="arrow-left" nzTheme="outline"></i>Back to stories</a>
   <app-page-header [title]="page?.title" [subtitle]="page?.subtitle" [imageStyle]="page?.imageStyle"
     [date]="page?.date" [image]="page?.image"></app-page-header>
-  <markdown class="article-body" [src]="page?.filename"></markdown>
+  <markdown *ngIf="page?.content" class="article-body" [data]="page?.content || ''"></markdown>
 </article>

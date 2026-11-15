@@ -16,11 +16,16 @@
 
   <section class="latest-posts" aria-labelledby="latest-title">
     <div class="section-heading">
-      <h2 id="latest-title">Latest stories</h2>
-      <p>Practical notes, experiments, and things worth sharing.</p>
+      <div class="section-heading-copy">
+        <h2 id="latest-title">Latest stories</h2>
+        <p>Practical notes, experiments, and things worth sharing.</p>
+      </div>
+      <a class="view-all" routerLink="/stories">
+        View all stories <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+      </a>
     </div>
     <div class="story-grid">
-      <a *ngFor="let post of latestPosts; let first = first" [routerLink]="['/blog', post.id]" class="story-card">
+      <a *ngFor="let post of latestPosts$ | async; let first = first" [routerLink]="['/blog', post.id]" class="story-card">
         <div class="story-photo">
           <img [src]="post.image" [alt]="post.title" loading="lazy" />
           <span class="new-badge" *ngIf="first">NEW</span>
