@@ -1,0 +1,81 @@
+{
+  "name": "Techbite MCP Server",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "techbite-blog",
+        "authentication": "none",
+        "instructions": "Use the generate_blog_post tool to write and publish a Techbite article about one or more technology topics. Pass a comma-separated list of topics in the query field."
+      },
+      "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+      "name": "Techbite MCP Server",
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Generate and publish a Techbite blog article about one or more technology topics. Use this when the user asks to write, create, or generate an article about a technology, programming language, framework, developer tool, or software engineering topic. Pass a comma-separated list of topics in the query field, for example: 'angular, java'.",
+        "method": "POST",
+        "url": "https://lkvurqiojgabbztkfjeo.supabase.co/functions/v1/generate-blog-post",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-webhook-secret",
+              "value": "REPLACE_WITH_YOUR_BLOG_WEBHOOK_SECRET"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ query: $fromAI('query', 'Comma-separated technology topics, e.g. angular, java, rust', 'string') }) }}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+      "name": "Generate Blog Post",
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [-280, 0]
+    },
+    {
+      "parameters": {
+        "content": "## Techbite MCP Server\n\n1. Open **Generate Blog Post** and replace `REPLACE_WITH_YOUR_BLOG_WEBHOOK_SECRET` with the Supabase `BLOG_WEBHOOK_SECRET`.\n2. Activate this workflow.\n3. Copy the **Production MCP URL** from the trigger, e.g. `https://YOUR_N8N_HOST/mcp/techbite-blog`, into the **Techbite MCP Client** node in the agent workflow.\n\nOptional: set the trigger to **Bearer Auth** and add the same credential to the MCP Client Tool.",
+        "height": 340,
+        "width": 500,
+        "color": 4
+      },
+      "id": "d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f7a",
+      "name": "Setup",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-800, -200]
+    }
+  ],
+  "connections": {
+    "Generate Blog Post": {
+      "ai_tool": [
+        [
+          {
+            "node": "Techbite MCP Server",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {},
+  "versionId": "e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b"
+}

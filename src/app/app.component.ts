@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { BlogService } from './services/blog.service';
 import { Page } from './models/page.model';
 
@@ -14,7 +14,7 @@ import { Page } from './models/page.model';
 export class AppComponent implements OnInit, OnDestroy {
   options: string[] = [];
   links: Page[] = [];
-  topLinks: Page[] = [];
+  topLinks$ = this.blogService.getPages().pipe(map((pages) => pages.slice(0, 3)));
   model = '';
   isMenuOpen = false;
   isSearchOpen = false;
@@ -26,7 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.blogService.getPages().subscribe((pages) => {
       this.links = pages;
-      this.topLinks = pages.slice(0, 3);
     });
   }
 

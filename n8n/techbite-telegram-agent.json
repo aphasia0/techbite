@@ -1,0 +1,202 @@
+{
+  "name": "Techbite Telegram Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"],
+        "additionalFields": {
+          "userIds": "123456789"
+        }
+      },
+      "id": "a1c3e5f7-9b2d-4c6a-8e0f-1a2b3c4d5e6f",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0],
+      "webhookId": "b2d4f6a8-0c3e-4d7b-9f1a-2b3c4d5e6f7a"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1",
+              "name": "chatInput",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "2",
+              "name": "sessionId",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b3d5f7a9-1c4e-4d8b-8a2f-3c4d5e6f7a8b",
+      "name": "Normalize Telegram Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "You are Techbite's editorial assistant, replying on Telegram. Techbite is Antonio Giordano's developer blog.\n\nWhen the user asks you to write, create, or generate an article about one or more technology topics, call the `generate_blog_post` tool (the node is called \"Generate Blog Post\") with a comma-separated `query`, for example \"angular, java\" or \"rust\". The tool researches recent sources, writes the article in Techbite's style, and publishes it to the blog.\n\nRules:\n- If the user gives multiple topics, put all of them in one comma-separated query.\n- Do not invent article content yourself; always use the tool.\n- After the tool returns, reply with the created post title, id, and published date.\n- Keep replies short: this is Telegram.\n- If the tool returns an error, explain it briefly and suggest retrying or changing the topics."
+        }
+      },
+      "id": "c4e6a8b0-2d5f-4e9c-9b3a-4d5e6f7a8b9c",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [520, 0]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "openai/gpt-oss-120b",
+          "cachedResultName": "openai/gpt-oss-120b"
+        },
+        "options": {
+          "maxTokensToSample": 4096,
+          "temperature": 0.6
+        }
+      },
+      "id": "d5f7b9c1-3e6a-4f0d-8c4b-5e6f7a8b9c0d",
+      "name": "Groq Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [400, 240]
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://YOUR_N8N_HOST/mcp/techbite-blog",
+        "authentication": "none",
+        "include": "all",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "e6a8c0d2-4f7b-4a1e-9d5c-6f7a8b9c0d1e",
+      "name": "Techbite MCP Client",
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.1,
+      "position": [640, 240]
+    },
+    {
+      "parameters": {},
+      "id": "f7b9d1e3-5a8c-4b2f-8e6d-7a8b9c0d1e2f",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [880, 240]
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "operation": "sendMessage",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "id": "a8c0e2f4-6b9d-4c3a-9f7e-8b9c0d1e2f3a",
+      "name": "Reply on Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [820, 0]
+    },
+    {
+      "parameters": {
+        "content": "## Techbite Telegram Agent\n\n1. Open **Telegram Trigger** and create/select a Telegram credential.\n2. Replace `123456789` in **Restrict to User IDs** with your Telegram user ID (get it from @userinfobot).\n3. Open **Techbite MCP Client** and paste the Production MCP URL from the MCP Server workflow.\n4. Open **Groq Chat Model** and select your Groq credential.\n5. Activate and message the bot: \"Scrivi un articolo su Angular e Java\".\n\nThe trigger already restricts messages to your user ID.",
+        "height": 360,
+        "width": 500,
+        "color": 3
+      },
+      "id": "b9d1f3a5-7c0e-4d4b-8a8f-9c0d1e2f3a4b",
+      "name": "Setup",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-360, -220]
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Normalize Telegram Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Telegram Message": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Techbite MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Reply on Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {},
+  "versionId": "c0e2a4b6-8d1f-4e5c-9b9a-0d1e2f3a4b5c"
+}

@@ -1,5 +1,19 @@
 const USER_AGENT = 'TechbiteBot/1.0 (+https://antoniogiordano.dev)';
 
+const MAX_CATEGORIES = 5;
+const MAX_CATEGORY_LENGTH = 80;
+
+export const DEFAULT_CATEGORIES = ['software development', 'technology'];
+
+const DEFAULT_FEEDS: Feed[] = [
+  { name: 'TechCrunch', url: 'https://techcrunch.com/feed/' },
+  { name: 'The Verge', url: 'https://www.theverge.com/rss/index.xml' },
+  {
+    name: 'Ars Technica',
+    url: 'https://feeds.arstechnica.com/arstechnica/index',
+  },
+];
+
 export interface Feed {
   name: string;
   url: string;
@@ -13,48 +27,72 @@ export interface Story {
   publishedAt?: string;
   imageUrl?: string;
   score: number;
+  relevance?: number;
 }
 
-export const DEFAULT_FEEDS: Feed[] = [
-  {
-    name: 'Google News · AI US',
-    url:
-      'https://news.google.com/rss/search?q=artificial+intelligence+United+States&hl=en-US&gl=US&ceid=US:en',
-  },
-  {
-    name: 'TechCrunch AI',
-    url: 'https://techcrunch.com/category/artificial-intelligence/feed/',
-  },
-  {
-    name: 'The Verge AI',
-    url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml',
-  },
-  {
-    name: 'Wired AI',
-    url: 'https://www.wired.com/feed/tag/ai/latest/rss',
-  },
-  {
-    name: 'MIT Technology Review AI',
-    url: 'https://www.technologyreview.com/topic/artificial-intelligence/feed',
-  },
-];
+/**
+ * Accepts a single string (`"angular"`), a comma-separated string
+ * (`"angular, java"`), or an array of strings (`["angular", "java"]`).
+ */
+export function normalizeCategories(input: unknown): string[] {
+  const rawValues = Array.isArray(input) ? input : [input];
+  const seen = new Set<string>();
+  const categories: string[] = [];
 
-export async function collectStories(): Promise<Story[]> {
+  for (const raw of rawValues) {
+    if (typeof raw !== 'string') {
+      continue;
+    }
+
+    for (const part of raw.split(',')) {
+      const value = part.trim().slice(0, MAX_CATEGORY_LENGTH);
+      if (!value) {
+        continue;
+      }
+
+      const key = value.toLowerCase();
+      if (seen.has(key)) {
+        continue;
+      }
+
+      seen.add(key);
+      categories.push(value);
+
+      if (categories.length >= MAX_CATEGORIES) {
+        return categories;
+      }
+    }
+  }
+
+  return categories.length > 0 ? categories : DEFAULT_CATEGORIES;
+}
+
+export async function collectStories(categories: string[]): Promise<Story[]> {
   const customFeeds = (Deno.env.get('NEWS_FEEDS') ?? '')
     .split(',')
     .map((value) => value.trim())
     .filter(Boolean)
     .map((feedUrl) => ({ name: hostname(feedUrl), url: feedUrl }));
 
-  const feeds = customFeeds.length > 0 ? customFeeds : DEFAULT_FEEDS;
-  const hnQuery = Deno.env.get('HN_QUERY') ?? 'artificial intelligence';
+  const feeds = customFeeds.length > 0 ? customFeeds : [
+    {
+      name: `Google News · ${categories.join(' / ')}`,
+      url: googleNewsUrl(categories),
+    },
+    ...categories.map((category) => ({
+      name: `Dev.to · ${category}`,
+      url: `https://dev.to/feed/tag/${encodeURIComponent(devToTag(category))}`,
+    })),
+    ...DEFAULT_FEEDS,
+  ];
+
+  const hnQueries = Deno.env.get('HN_QUERY')
+    ? [Deno.env.get('HN_QUERY')!]
+    : categories;
 
   const [feedResults, hnStories] = await Promise.all([
     Promise.allSettled(feeds.map((feed) => fetchFeed(feed))),
-    fetchHackerNews(hnQuery).catch((error) => {
-      console.warn('Hacker News fetch failed', error);
-      return [] as Story[];
-    }),
+    fetchHackerNews(hnQueries),
   ]);
 
   const stories: Story[] = [];
@@ -67,7 +105,23 @@ export async function collectStories(): Promise<Story[]> {
   }
   stories.push(...hnStories);
 
-  return rankStories(stories);
+  return rankStories(stories, categories);
+}
+
+function googleNewsUrl(categories: string[]): string {
+  const terms = categories.map((category) =>
+    category.includes(' ') ? `"${category}"` : category
+  );
+  const query = `(${
+    terms.join(' OR ')
+  }) (programming OR developer OR software OR framework OR code OR engineering) when:7d`;
+  return `https://news.google.com/rss/search?q=${
+    encodeURIComponent(query)
+  }&hl=en-US&gl=US&ceid=US:en`;
+}
+
+function devToTag(category: string): string {
+  return category.toLowerCase().replace(/[^a-z0-9]+/g, '');
 }
 
 async function fetchFeed(feed: Feed): Promise<Story[]> {
@@ -87,12 +141,26 @@ async function fetchFeed(feed: Feed): Promise<Story[]> {
   return parseFeed(await response.text(), feed).slice(0, 10);
 }
 
-async function fetchHackerNews(query: string): Promise<Story[]> {
+async function fetchHackerNews(queries: string[]): Promise<Story[]> {
+  const results = await Promise.allSettled(
+    queries.slice(0, 4).map((query) => fetchHackerNewsQuery(query)),
+  );
+
+  return results.flatMap((result) => {
+    if (result.status === 'fulfilled') {
+      return result.value;
+    }
+    console.warn('Hacker News fetch failed', result.reason);
+    return [];
+  });
+}
+
+async function fetchHackerNewsQuery(query: string): Promise<Story[]> {
   const since = Math.floor(Date.now() / 1000) - 7 * 24 * 60 * 60;
   const params = new URLSearchParams({
     query,
     tags: 'story',
-    hitsPerPage: '20',
+    hitsPerPage: '10',
     numericFilters: `created_at_i>${since}`,
   });
 
@@ -172,7 +240,7 @@ function toStory(item: string, feed: Feed): Story | null {
   };
 }
 
-export function rankStories(stories: Story[]): Story[] {
+export function rankStories(stories: Story[], categories: string[]): Story[] {
   const seen = new Set<string>();
   const now = Date.now();
 
@@ -190,10 +258,14 @@ export function rankStories(stories: Story[]): Story[] {
       ? Math.max(0, (now - new Date(story.publishedAt).getTime()) / 86_400_000)
       : 7;
     const recency = Math.max(0, 14 - ageDays);
-    return { ...story, score: story.score + recency };
+    return {
+      ...story,
+      relevance: relevanceScore(story, categories),
+      score: story.score + recency,
+    };
   });
 
-  scored.sort((a, b) => b.score - a.score);
+  scored.sort((a, b) => b.relevance - a.relevance || b.score - a.score);
 
   const perSource = new Map<string, number>();
   const selected: Story[] = [];
@@ -211,6 +283,33 @@ export function rankStories(stories: Story[]): Story[] {
   }
 
   return selected;
+}
+
+function relevanceScore(story: Story, categories: string[]): number {
+  const haystack = `${story.title} ${story.summary}`.toLowerCase();
+  let score = 0;
+
+  for (const category of categories) {
+    const phrase = category.toLowerCase().trim();
+    if (!phrase) {
+      continue;
+    }
+    if (containsTerm(haystack, phrase)) {
+      score += 3;
+    }
+    for (const term of phrase.split(/\s+/)) {
+      if (term.length > 2 && containsTerm(haystack, term)) {
+        score += 1;
+      }
+    }
+  }
+
+  return score;
+}
+
+function containsTerm(haystack: string, term: string): boolean {
+  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`).test(haystack);
 }
 
 function extractTag(xml: string, tag: string): string | undefined {

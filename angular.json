@@ -30,8 +30,12 @@
               "src/favicon.ico",
               "src/googlea8c4c713dfc66128.html",
               "src/robots.txt",
-              "src/sitemap.txt",
-              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets",
+                "ignore": ["md/**"]
+              },
               {
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
@@ -114,8 +118,12 @@
               "src/favicon.ico",
               "src/googlea8c4c713dfc66128.html",
               "src/robots.txt",
-              "src/sitemap.txt",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets",
+                "ignore": ["md/**"]
+              }
             ],
             "styles": [
               "src/styles.scss"

@@ -4,4 +4,4 @@ Disallow: /nogooglebot/
 User-agent: *
 Allow: /
 
-Sitemap: https://antoniogiordano.dev/sitemap.txt
+Sitemap: https://antoniogiordano.dev/sitemap.xml

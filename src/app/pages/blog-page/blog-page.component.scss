@@ -15,4 +15,11 @@
 :host ::ng-deep .article-body code { padding: 2px 5px; border-radius: 4px; background: var(--color-surface-strong); color: var(--color-ink); font-size: 0.9em; }
 :host ::ng-deep .article-body pre { overflow-x: auto; padding: 24px; border-radius: 14px; background: #222222; }
 :host ::ng-deep .article-body pre code { padding: 0; background: transparent; color: inherit; }
+.related-stories { max-width: 780px; margin: 64px auto 0; padding-top: 32px; border-top: 1px solid var(--color-hairline-soft); }
+.related-stories h2 { margin-bottom: 16px; font-size: 21px; }
+.related-stories ul { display: grid; gap: 12px; padding: 0; list-style: none; }
+.related-stories a { display: flex; flex-direction: column; gap: 4px; padding: 16px; border: 1px solid var(--color-hairline); border-radius: 12px; background: white; transition: box-shadow 200ms ease, transform 200ms ease; }
+.related-stories a:hover { box-shadow: var(--shadow-float); transform: translateY(-2px); }
+.related-title { color: var(--color-ink); font-weight: 600; }
+.related-subtitle { color: var(--color-muted); font-size: 14px; }
 @media (max-width: 743px) { .article-page { padding-top: 24px; } .back-link { margin-bottom: 24px; } .article-body { margin-top: 32px; } :host ::ng-deep .article-body pre { padding: 16px; } }

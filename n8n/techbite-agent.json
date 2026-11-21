@@ -1,0 +1,135 @@
+{
+  "name": "Techbite Editorial Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "f6a7b8c9-d0e1-4f2a-9b3c-4d5e6f7a8b9c",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [0, 0],
+      "webhookId": "a7b8c9d0-e1f2-4a3b-8c4d-5e6f7a8b9c0d"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are Techbite's editorial assistant. Techbite is Antonio Giordano's developer blog.\n\nWhen the user asks you to write, create, or generate an article about one or more technology topics, call the `generate_blog_post` tool (the node is called \"Generate Blog Post\") with a comma-separated `query`, for example \"angular, java\" or \"rust\". The tool researches recent sources, writes the article in Techbite's style, and publishes it to the blog.\n\nRules:\n- If the user gives multiple topics, put all of them in one comma-separated query.\n- Do not invent article content yourself; always use the tool.\n- After the tool returns, reply with the created post title, id, and published date, and remind the user that it is live on the blog.\n- If the tool returns an error, explain it briefly and suggest retrying or changing the topics.\n- Keep replies concise and practical."
+        }
+      },
+      "id": "a8b9c0d1-e2f3-4b4c-9d5e-6f7a8b9c0d1e",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [280, 0]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "openai/gpt-oss-120b",
+          "cachedResultName": "openai/gpt-oss-120b"
+        },
+        "options": {
+          "maxTokensToSample": 4096,
+          "temperature": 0.6
+        }
+      },
+      "id": "b9c0d1e2-f3a4-4c5d-8e6f-7a8b9c0d1e2f",
+      "name": "Groq Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [0, 240]
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://YOUR_N8N_HOST/mcp/techbite-blog",
+        "authentication": "none",
+        "include": "all",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "c0d1e2f3-a4b5-4d6e-9f7a-8b9c0d1e2f3a",
+      "name": "Techbite MCP Client",
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.1,
+      "position": [280, 240]
+    },
+    {
+      "parameters": {},
+      "id": "d1e2f3a4-b5c6-4e7f-8a8b-9c0d1e2f3a4b",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [560, 240]
+    },
+    {
+      "parameters": {
+        "content": "## Techbite Editorial Agent\n\n1. Open **Groq Chat Model** and create/select a Groq credential. Confirm the model (e.g. `openai/gpt-oss-120b`).\n2. Open **Techbite MCP Client** and replace `https://YOUR_N8N_HOST/mcp/techbite-blog` with the Production MCP URL from the MCP Server workflow.\n3. Activate this workflow and open the chat.\n4. Try: \"Write an article about Angular and Java\".\n\nIf you enabled Bearer auth on the MCP trigger, add the same bearer credential to the MCP Client.",
+        "height": 320,
+        "width": 480,
+        "color": 5
+      },
+      "id": "e2f3a4b5-c6d7-4f8a-9b9c-0d1e2f3a4b5c",
+      "name": "Setup",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-640, -200]
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Techbite MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "pinData": {},
+  "versionId": "f3a4b5c6-d7e8-4a9b-8c0d-1e2f3a4b5c6d"
+}

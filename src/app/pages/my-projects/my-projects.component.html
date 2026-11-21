@@ -1,12 +1,19 @@
 <div class="projects-page page-container">
   <app-page-header title="My Projects" subtitle="Side projects I've built"></app-page-header>
 
+  <p class="projects-intro">
+    I build small tools to solve problems I run into, usually with Angular, TypeScript and
+    Flutter. Every project below is live and open to try. They are deliberately narrow in
+    scope: one clear job, a simple interface and as little setup as possible.
+  </p>
+
   <section class="projects-section" aria-label="Projects">
     <div class="project-grid">
       <article *ngFor="let project of projects" class="project-card">
         <div class="project-icon" aria-hidden="true">{{ project.name[0] }}</div>
         <h2>{{ project.name }}</h2>
         <p>{{ project.description }}</p>
+        <p class="project-tech">{{ project.technologies }}</p>
         <a [href]="project.url" target="_blank" rel="noopener noreferrer" class="project-link">
           <span>Visit project</span><i nz-icon nzType="export" nzTheme="outline"></i>
         </a>

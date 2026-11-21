@@ -65,7 +65,7 @@
       </section>
       <section>
         <h2>Recent notes</h2>
-        <a *ngFor="let page of topLinks" [routerLink]="['/blog', page.id]">{{ page.title }}</a>
+        <a *ngFor="let page of topLinks$ | async" [routerLink]="['/blog', page.id]">{{ page.title }}</a>
       </section>
       <section>
         <h2>Connect</h2>

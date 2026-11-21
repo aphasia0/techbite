@@ -1,6 +1,18 @@
 <article class="article-page page-container">
   <a class="back-link" routerLink="/home"><i nz-icon nzType="arrow-left" nzTheme="outline"></i>Back to stories</a>
-  <app-page-header [title]="page?.title" [subtitle]="page?.subtitle" [imageStyle]="page?.imageStyle"
-    [date]="page?.date" [image]="page?.image"></app-page-header>
-  <markdown *ngIf="page?.content" class="article-body" [data]="page?.content || ''"></markdown>
+  <app-page-header [title]="page()?.title" [subtitle]="page()?.subtitle" [imageStyle]="page()?.imageStyle"
+    [date]="page()?.date" [image]="page()?.image"></app-page-header>
+  <markdown *ngIf="body()" class="article-body" [data]="body()"></markdown>
+
+  <section class="related-stories" *ngIf="related().length" aria-labelledby="related-title">
+    <h2 id="related-title">Related stories</h2>
+    <ul>
+      <li *ngFor="let post of related()">
+        <a [routerLink]="['/blog', post.id]">
+          <span class="related-title">{{ post.title }}</span>
+          <span class="related-subtitle" *ngIf="post.subtitle">{{ post.subtitle }}</span>
+        </a>
+      </li>
+    </ul>
+  </section>
 </article>

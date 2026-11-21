@@ -35,4 +35,50 @@
       </div>
     </div>
   </div>
+
+  <div class="tool-content">
+    <section aria-labelledby="how-it-works">
+      <h2 id="how-it-works">How the PDF password remover works</h2>
+      <p>
+        Some PDF files are protected with an <em>open password</em>: you need it every time
+        you want to read or print the document. That is useful for sensitive files, but
+        annoying when the copy is yours and you simply want a version that opens without
+        typing the password again.
+      </p>
+      <p>
+        This tool takes three steps. You select the protected PDF, enter its current
+        password and start the process. The file is sent over HTTPS to a small processing
+        service, decrypted and returned to your browser as a normal download. Nothing is
+        installed on your computer and there is no account to create.
+      </p>
+      <p>
+        It works with the password you already know. It is not a password cracker: if you do
+        not know the password, the tool cannot open the document for you.
+      </p>
+    </section>
+
+    <section aria-labelledby="when-to-use">
+      <h2 id="when-to-use">When to use it</h2>
+      <ul>
+        <li>You received a PDF for a course or a contract and want a copy that opens without the password.</li>
+        <li>You need to print or share a document you own without exposing the password to other people.</li>
+        <li>You are preparing files for an archive and want to remove an obsolete protection layer.</li>
+      </ul>
+      <p>
+        Only use the tool on documents you own or are explicitly allowed to modify. Removing
+        protection from a file you do not control may violate the law or the terms under
+        which the file was shared with you.
+      </p>
+    </section>
+
+    <section aria-labelledby="faq">
+      <h2 id="faq">Frequently asked questions</h2>
+      <dl class="faq-list">
+        <div class="faq-item" *ngFor="let item of faq">
+          <dt>{{ item.question }}</dt>
+          <dd>{{ item.answer }}</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
 </div>

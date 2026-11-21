@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { map } from 'rxjs';
 import { BlogService } from '../../services/blog.service';
+import { SeoService } from '../../services/seo.service';
 import { Page } from '../../models/page.model';
 import { PageHeaderComponent } from '../page-header/page-header.component';
 
@@ -24,10 +25,19 @@ interface StoriesView {
   templateUrl: './all-stories.component.html',
   styleUrls: ['./all-stories.component.scss'],
 })
-export class AllStoriesComponent {
+export class AllStoriesComponent implements OnInit {
   view$ = this.blogService.getPages().pipe(map((pages) => this.toView(pages)));
 
-  constructor(private blogService: BlogService) {}
+  constructor(private blogService: BlogService, private seo: SeoService) {}
+
+  ngOnInit(): void {
+    this.seo.setPage({
+      title: 'All stories',
+      description:
+        'Every note, experiment and thing worth sharing about Angular, Java, Spring, Web3 and Flutter — newest first.',
+      path: '/stories',
+    });
+  }
 
   private toView(pages: Page[]): StoriesView {
     const groups = new Map<string, Page[]>();

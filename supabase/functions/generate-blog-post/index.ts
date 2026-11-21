@@ -3,11 +3,19 @@
  * generate-blog-post
  *
  * Free pipeline for the Techbite blog:
- *   1. collect recent AI-in-the-US stories from RSS feeds + Hacker News
- *      (see ./sources.ts)
- *   2. rank and dedupe them
+ *   1. collect recent technology/development stories from Google News RSS,
+ *      general tech feeds and Hacker News (see ./sources.ts)
+ *   2. rank them by relevance to the requested categories
  *   3. ask an LLM to synthesize a Techbite-style Markdown article
  *   4. insert the article into public.blog_pages
+ *
+ * Categories can be passed as:
+ *   ?query=angular
+ *   ?query=angular,java
+ *   ?query=angular&query=java
+ *   JSON body: { "query": ["angular", "java"] }
+ *   JSON array body: ["angular", "java"]
+ *   plain text body: angular, java
  *
  * Deploy:
  *   supabase functions deploy generate-blog-post --no-verify-jwt
@@ -22,11 +30,13 @@
  * Optional:
  *   LLM_PROVIDER            openai | groq | openrouter | xai
  *   LLM_MODEL               provider-specific model name
+ *   LLM_MAX_TOKENS          max output tokens (default: 4096)
  *   NEWS_FEEDS              comma-separated RSS/Atom feed URLs
- *   HN_QUERY                Hacker News search query (default: artificial intelligence)
+ *   HN_QUERY                Hacker News search query (overrides categories)
  */
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import { collectStories, type Story } from './sources.ts';
+import { collectStories, normalizeCategories, type Story } from './sources.ts';
+import { buildSourceLabels, compactLinks } from './markdown.ts';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -38,14 +48,16 @@ const corsHeaders = {
 const SYSTEM_PROMPT =
   `You are the editor of Techbite, a developer blog written by Antonio Giordano.
 
-You receive recent news stories and community posts about AI in the United States. Turn them into ONE cohesive blog post in Markdown.
+You receive recent news stories and community posts about technology and software development. Turn them into ONE cohesive blog post in Markdown.
+
+The user will give you the topics to focus on. Keep the article practical, opinionated, and developer-oriented, even when a story is broader tech news.
 
 Style and structure:
 - Start with "## <title>" (the post title repeated as the first heading).
 - Open with one short intro paragraph (2-4 sentences).
 - Use 3 to 5 "###" sections separated by "---".
 - Use "> " blockquotes for notable quotes, attributing the source when available.
-- Finish with "### Sources" and a bullet list of the story URLs provided.
+- Finish with "### Sources" and a bullet list of compact Markdown links: "- [Publisher — Title](URL)". Never paste a raw URL as visible text.
 - 600-900 words. Practical, opinionated, developer-focused, first person ("I").
 - Only state facts that appear in the provided stories. Do not invent numbers, quotes, products, or events.
 - If the stories do not support a coherent article, return {"error":"..."} instead of inventing content.
@@ -106,6 +118,11 @@ interface GeneratedPost {
   content: string;
 }
 
+interface RequestOptions {
+  categories: string[];
+  dryRun: boolean;
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
@@ -123,8 +140,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const url = new URL(req.url);
-    const dryRun = url.searchParams.get('dryRun') === '1';
+    const { categories, dryRun } = await readRequestOptions(req);
 
     const supabase = createClient(
       Deno.env.get('SUPABASE_URL')!,
@@ -132,12 +148,12 @@ Deno.serve(async (req) => {
       { auth: { persistSession: false } },
     );
 
-    const stories = await collectStories();
+    const stories = await collectStories(categories);
     if (stories.length === 0) {
-      return json({ error: 'No recent stories found' }, 404);
+      return json({ error: 'No recent stories found', categories }, 404);
     }
 
-    const generated = await generatePost(stories);
+    const generated = await generatePost(stories, categories);
     const slug = await uniqueSlug(
       supabase,
       slugify(generated.id || generated.title),
@@ -158,6 +174,7 @@ Deno.serve(async (req) => {
     if (dryRun) {
       return json({
         dryRun: true,
+        categories,
         stories: stories.map((story) => ({
           source: story.source,
           title: story.title,
@@ -183,12 +200,16 @@ Deno.serve(async (req) => {
           .select('id, title, subtitle, published_at')
           .single();
         if (retry.error) throw retry.error;
-        return json({ created: retry.data, stories: stories.length }, 201);
+        return json({
+          created: retry.data,
+          categories,
+          stories: stories.length,
+        }, 201);
       }
       throw error;
     }
 
-    return json({ created: data, stories: stories.length }, 201);
+    return json({ created: data, categories, stories: stories.length }, 201);
   } catch (error) {
     console.error('generate-blog-post failed', error);
     return json({
@@ -197,7 +218,50 @@ Deno.serve(async (req) => {
   }
 });
 
-async function generatePost(stories: Story[]): Promise<GeneratedPost> {
+async function readRequestOptions(req: Request): Promise<RequestOptions> {
+  const url = new URL(req.url);
+  const dryRun = url.searchParams.get('dryRun') === '1';
+
+  const fromQuery = [
+    ...url.searchParams.getAll('query'),
+    ...url.searchParams.getAll('q'),
+    ...url.searchParams.getAll('categories'),
+  ];
+
+  let fromBody: unknown;
+  const contentType = req.headers.get('content-type') ?? '';
+
+  if (contentType.includes('application/json')) {
+    try {
+      const body = await req.json();
+      if (Array.isArray(body) || typeof body === 'string') {
+        fromBody = body;
+      } else if (body && typeof body === 'object') {
+        const record = body as Record<string, unknown>;
+        fromBody = record['query'] ?? record['categories'] ?? record['topics'];
+      }
+    } catch {
+      // Ignore invalid JSON.
+    }
+  } else if (contentType.includes('text/plain')) {
+    fromBody = await req.text();
+  }
+
+  const merged = [
+    ...(Array.isArray(fromBody) ? fromBody : fromBody ? [fromBody] : []),
+    ...fromQuery,
+  ];
+
+  return {
+    categories: normalizeCategories(merged),
+    dryRun,
+  };
+}
+
+async function generatePost(
+  stories: Story[],
+  categories: string[],
+): Promise<GeneratedPost> {
   const providerName = pickProvider();
   const provider = PROVIDERS[providerName];
   const apiKey = Deno.env.get(provider.keyEnv);
@@ -215,8 +279,9 @@ async function generatePost(stories: Story[]): Promise<GeneratedPost> {
     })
     .join('\n');
 
-  const userPrompt =
-    `Recent AI-in-the-US stories:\n\n${storyBlock}\n\nWrite the post now. Return JSON only.`;
+  const userPrompt = `Requested topics: ${
+    categories.join(', ')
+  }\n\nRecent technology stories:\n\n${storyBlock}\n\nWrite the post now. Return JSON only.`;
 
   const headers: Record<string, string> = {
     Authorization: `Bearer ${apiKey}`,
@@ -279,13 +344,16 @@ async function generatePost(stories: Story[]): Promise<GeneratedPost> {
     throw new Error('LLM response is missing title, subtitle or content');
   }
 
+  const labels = buildSourceLabels(stories);
+  const compactedContent = compactLinks(generatedContent, labels);
+
   return {
     id: parsed.id,
     title,
     subtitle,
-    content: generatedContent.startsWith('## ')
-      ? generatedContent
-      : `## ${title}\n\n${generatedContent}`,
+    content: compactedContent.startsWith('## ')
+      ? compactedContent
+      : `## ${title}\n\n${compactedContent}`,
   };
 }
 
@@ -364,7 +432,7 @@ function slugify(value: string): string {
     .slice(0, 80)
     .replace(/-+$/g, '');
 
-  return slug || `ai-in-the-us-${new Date().toISOString().slice(0, 10)}`;
+  return slug || `techbite-${new Date().toISOString().slice(0, 10)}`;
 }
 
 function pickImage(stories: Story[]): string | undefined {
